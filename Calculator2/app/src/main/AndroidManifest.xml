@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/calculator_launcher_icon"
         android:label="Calculator"
         android:color="@color/black"
         android:roundIcon="@mipmap/calculator_launcher_icon_round"
