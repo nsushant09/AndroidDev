@@ -20,12 +20,19 @@ public class MainActivity extends AppCompatActivity {
     String first = "0";
     String second = "";
     String operation = "+";
+    StringBuilder stringall = new StringBuilder("");
     double total = 0;
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "WrongConstant"})
     public void showDisplay(View view, String recieve_int){
         TextView displayObj = findViewById(R.id.Display);
+        TextView displayAll = findViewById(R.id.DisplayAll);
+        displayObj.setTextSize(40);
         String recieved = recieve_int;
+        if(!recieved.equals("C") && !recieved.equals("=")){
+            stringall.append(recieve_int);
+            displayAll.setText(stringall);
+        }
         if(recieved.equals("+") || recieved.equals("-") || recieved.equals("*") || recieved.equals("/") || recieved.equals("=") || recieved.equals("C")){
             operation = recieved;
             first = total + "";
@@ -80,11 +87,15 @@ public class MainActivity extends AppCompatActivity {
                 first = "0";
                 second = "";
                 operation = "+";
-                displayObj.setText(total+"");
+                stringall.replace(0,stringall.length(),"");
+                displayAll.setText(stringall);
+                displayObj.setText("");
                 break;
 
             case "=" :
+                displayObj.setTextSize(55);
                 displayObj.setText(total+"");
+                displayAll.setText("");
 
         }
     }
