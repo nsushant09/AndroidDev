@@ -92,42 +92,33 @@ public class MainActivity extends AppCompatActivity {
     public void onClickOne(View view){
         showDisplay(view,"1");
     }
-
     public void onClickTwo(View view){
         showDisplay(view,"2");
     }
-
     public void onClickThree(View view){
         showDisplay(view,"3");
     }
-
     public void onClickFour(View view){
         showDisplay(view,"4");
     }
-
     public void onClickFive(View view){
         showDisplay(view,"5");
     }
-
     public void onClickSix(View view){
         showDisplay(view,"6");
     }
-
     public void onClickSeven(View view){
         showDisplay(view,"7");
     }
     public void onClickEight(View view){
         showDisplay(view,"8");
     }
-
     public void onClickNine(View view){
         showDisplay(view,"9");
     }
-
     public void onClickZero(View view){
         showDisplay(view,"0");
     }
-
     public void onClickAdd(View view){
         showDisplay(view,"+");
     }
