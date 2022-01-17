@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Login">
+
+    <ImageView
+        android:id="@+id/schoolLogo"
+        android:layout_width="133dp"
+        android:layout_height="230dp"
+        android:contentDescription="@string/school_full_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintCircleRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schoolTitle"
+        app:layout_constraintVertical_bias="0.05"
+        app:srcCompat="@drawable/lrilogo" />
+
+    <TextView
+        android:id="@+id/schoolTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntumedium"
+        android:padding="10dp"
+        android:text="@string/school_full_name"
+        android:textColor="@color/primary"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <TextView
+        android:id="@+id/schoolSlogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntumedium"
+        android:padding="10dp"
+        android:text="@string/school_slogan"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/schoolLogo"
+        app:layout_constraintVertical_bias="0" />
+
+    <TextView
+        android:id="@+id/loginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/dongleregular"
+        android:padding="10dp"
+        android:text="@string/login_as"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schoolSlogan"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <Button
+        android:id="@+id/btnLoginAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:background="@drawable/pink_button"
+        android:letterSpacing="0.1"
+        android:padding="10dp"
+        android:text="@string/administrator"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginText"
+        app:layout_constraintVertical_bias="0"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btnLoginStudent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:background="@drawable/creame_button"
+        android:letterSpacing="0.1"
+        android:padding="10dp"
+        android:text="@string/student"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLoginAdmin"
+        app:layout_constraintVertical_bias="0.2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
