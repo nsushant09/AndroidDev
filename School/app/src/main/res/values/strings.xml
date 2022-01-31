@@ -16,7 +16,11 @@
     <string name="school_slogan">Lead The World LRI Way</string>
     <string name="administrator">Administrator</string>
     <string name="student">Student</string>
-    <string name = "username">Username</string>
-    <string name = "password">Password</string>
-    <string name = "log_in">Log In</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

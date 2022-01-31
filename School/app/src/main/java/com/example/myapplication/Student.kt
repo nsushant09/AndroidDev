@@ -5,7 +5,7 @@ import android.app.AppComponentFactory
 class Student constructor(private var firstName: String,private var lastName : String,private var grade: Byte){
     companion object{
         private var studentCount : Int = 0
-        private var studentList = arrayListOf<Student>()
+        var studentList = arrayListOf<Student>()
         init{
             defaultStudents()
         }
@@ -25,10 +25,13 @@ class Student constructor(private var firstName: String,private var lastName : S
     }
     private var userName : String = "${firstName.lowercase()}$studentCount"
     private var password : String = "${lastName}$grade"
+    var studentId : Int = studentCount
     fun getFirstName() : String = firstName
     fun getLastName() : String = lastName
     fun getGrade() : Byte = grade
     fun getStudentCount() : Int = studentCount
+    @JvmName("getStudentId1")
+    fun getStudentId() : Int = studentId
     private fun getUserName() : String = userName
 
     private fun getPassword() : String = password
