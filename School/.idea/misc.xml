@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/drawable/back_icon.xml" value="0.26513157894736844" />
+        <entry key="app/src/main/res/drawable/card_view.xml" value="0.2745" />
         <entry key="app/src/main/res/drawable/creame_button.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.2745" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.2745" />
@@ -14,6 +16,7 @@
         <entry key="app/src/main/res/drawable/password_fields.xml" value="0.1555921052631579" />
         <entry key="app/src/main/res/drawable/pink_button.xml" value="0.1555921052631579" />
         <entry key="app/src/main/res/drawable/school_logo_background.xml" value="0.2722972972972973" />
+        <entry key="app/src/main/res/drawable/shape.xml" value="0.2745" />
         <entry key="app/src/main/res/layout-w1240dp/activity_login.xml" value="0.27421875" />
         <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.302734375" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25493421052631576" />
@@ -21,6 +24,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_student_main.xml" value="0.33133817870884996" />
         <entry key="app/src/main/res/layout/activity_student_profile_page.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_student_gallary.xml" value="0.3471569046601112" />
+        <entry key="app/src/main/res/layout/fragment_student_home.xml" value="0.2868747327917914" />
+        <entry key="app/src/main/res/layout/fragment_student_menu.xml" value="0.2868747327917914" />
         <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.20182291666666666" />
         <entry key="app/src/main/res/layout/fragment_student_settings.xml" value="0.33133817870884996" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.33133817870884996" />

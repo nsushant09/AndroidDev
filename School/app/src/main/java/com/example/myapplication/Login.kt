@@ -13,8 +13,11 @@ class Login : AppCompatActivity() {
         val btnLoginStudent : Button= findViewById(R.id.btnLoginStudent)
         val btnLoginAdmin : Button = findViewById(R.id.btnLoginAdmin)
         val gotoLoginasStudent = Intent(this,LoginAsStudent::class.java)
+        val animation = supportFragmentManager.beginTransaction()
         btnLoginStudent.setOnClickListener{
             startActivity(gotoLoginasStudent)
+            overridePendingTransition(androidx.appcompat.R.anim.abc_slide_in_bottom,
+                androidx.appcompat.R.anim.abc_slide_out_top)
             finish()
         }
     }

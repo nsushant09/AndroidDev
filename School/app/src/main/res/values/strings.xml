@@ -23,4 +23,14 @@
     <string name="settings">Settings</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="menu">Menu</string>
+    <string name="gallary">Gallery</string>
+    <string name="id_number">Id Number</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="grade">Grade</string>
+    <string name="calender">Calender</string>
+    <string name="welcome_">Welcome</string>
+    <string name="notification">Notification</string>
 </resources>

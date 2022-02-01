@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/profile"
-        android:icon="@drawable/ic_profile"
-        android:title="@string/profile"/>
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home"/>
+
+    <item
+        android:id="@+id/menu"
+        android:icon="@drawable/ic_menu"
+        android:title="@string/menu"/>
+
+    <item
+        android:id="@+id/gallary"
+        android:icon="@drawable/ic_gallary"
+        android:title="@string/gallary"/>
 
     <item
         android:id="@+id/settings"
