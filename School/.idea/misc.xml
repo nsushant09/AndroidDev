@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/drawable/back_icon.xml" value="0.26513157894736844" />
+        <entry key="app/src/main/res/drawable/bottomnavigationbackground.xml" value="0.2745" />
         <entry key="app/src/main/res/drawable/card_view.xml" value="0.2745" />
         <entry key="app/src/main/res/drawable/creame_button.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.2745" />
