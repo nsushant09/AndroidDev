@@ -1,5 +1,6 @@
 package com.example.learnrecyclerview
 
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         rv.layoutManager = LinearLayoutManager(this)
 
         //Adapter class is initialized and list is passed in the parameter.
-        val itemAdapter = ItemAdapter(this, getItemsList())
+        val itemAdapter = ItemAdapter(this, getItemsList(),getImageList())
 
         //Adapter instance is set to to the recycler View to inflate the items.
         rv.adapter = itemAdapter
@@ -29,6 +30,20 @@ class MainActivity : AppCompatActivity() {
             list.add("Item $i")
         }
 
+        return list
+    }
+
+    private fun getImageList():ArrayList<Int>{
+        val list = arrayListOf<Int>()
+        var i = 0;
+        while(i<15){
+            list.add(R.drawable.car)
+            i++
+            list.add(R.drawable.lrilogo)
+            i++
+            list.add(R.drawable.ic_launcher_background)
+            i++
+        }
         return list
     }
 }
