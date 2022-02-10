@@ -33,4 +33,5 @@
     <string name="calender">Calender</string>
     <string name="welcome_">Welcome</string>
     <string name="notification">Notification</string>
+    <string name="notifications">Notifications</string>
 </resources>

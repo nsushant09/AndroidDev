@@ -8,11 +8,14 @@
         <entry key="app/src/main/res/drawable/bottomnavigationbackground.xml" value="0.2745" />
         <entry key="app/src/main/res/drawable/card_view.xml" value="0.2745" />
         <entry key="app/src/main/res/drawable/creame_button.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/home_assign_card.xml" value="0.289" />
         <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.2745" />
+        <entry key="app/src/main/res/drawable/ic_menu.xml" value="0.225" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.2745" />
         <entry key="app/src/main/res/drawable/login_as_teacher.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/login_button.xml" value="0.26513157894736844" />
         <entry key="app/src/main/res/drawable/loginfields.xml" value="0.26513157894736844" />
+        <entry key="app/src/main/res/drawable/notification_card.xml" value="0.289" />
         <entry key="app/src/main/res/drawable/password_field.xml" value="0.1555921052631579" />
         <entry key="app/src/main/res/drawable/password_fields.xml" value="0.1555921052631579" />
         <entry key="app/src/main/res/drawable/pink_button.xml" value="0.1555921052631579" />
@@ -30,6 +33,8 @@
         <entry key="app/src/main/res/layout/fragment_student_menu.xml" value="0.2868747327917914" />
         <entry key="app/src/main/res/layout/fragment_student_profile.xml" value="0.20182291666666666" />
         <entry key="app/src/main/res/layout/fragment_student_settings.xml" value="0.33133817870884996" />
+        <entry key="app/src/main/res/layout/home_assignment_rv_card.xml" value="0.33133817870884996" />
+        <entry key="app/src/main/res/layout/home_notification_rv_card.xml" value="0.335" />
         <entry key="app/src/main/res/layout/menu_recycler_view_card.xml" value="0.33133817870884996" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.33133817870884996" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/school_logo.xml" value="0.24635416666666668" />

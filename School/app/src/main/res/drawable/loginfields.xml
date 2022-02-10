@@ -9,6 +9,9 @@
     <item android:state_focused="true">
         <shape android:shape="rectangle">
             <solid android:color="@color/dark_silver"/>
+            <stroke
+                android:width="2dp"
+                android:color="@color/green"/>
             <corners android:radius="10dp"/>
         </shape>
     </item>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/creame_button"
+    android:paddingHorizontal="5dp"
+    android:paddingVertical="10dp"
+    android:layout_marginVertical="5dp"
+    android:id="@+id/home_noti_rv_card">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/notification"
+        android:contentDescription="@string/notification" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="10dp">
+
+        <TextView
+            android:id="@+id/home_noti_rv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntumedium"
+            android:textSize="24sp"
+            />
+
+        <TextView
+            android:id="@+id/home_noti_rv_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sourcesansproregular"
+            android:textSize="15sp"
+            android:padding="5dp"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
