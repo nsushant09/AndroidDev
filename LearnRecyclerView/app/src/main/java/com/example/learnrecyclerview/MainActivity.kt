@@ -3,7 +3,9 @@ package com.example.learnrecyclerview
 import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.AbsListView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.learnrecyclerview.adapters.ItemAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 

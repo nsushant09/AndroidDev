@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.todorecycler.adapter.RecyclerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception

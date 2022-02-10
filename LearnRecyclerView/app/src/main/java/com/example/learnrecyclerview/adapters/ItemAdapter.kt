@@ -25,7 +25,6 @@ class ItemAdapter (val context : Context, val items : ArrayList<String>, val ima
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         //variable item that stores the value in items list current position
         val item = items.get(position)
         val image = image.get(position)
