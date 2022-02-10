@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.adapter.MenuRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_student_menu.*
+import kotlinx.android.synthetic.main.menu_recycler_view_card.*
 
 
 class StudentMenuFragment : Fragment() {
@@ -29,6 +31,7 @@ class StudentMenuFragment : Fragment() {
         menu_rv.layoutManager = LinearLayoutManager(context)
         val menuRecyclerAdapter  = MenuRecyclerAdapter(requireContext(),imageArray(),titleList(),descriptionList())
         menu_rv.adapter = menuRecyclerAdapter
+
     }
 
     fun imageArray() : ArrayList<Int>{

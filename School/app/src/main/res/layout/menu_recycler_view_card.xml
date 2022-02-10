@@ -6,7 +6,8 @@
     android:layout_marginVertical="10dp"
     android:orientation="horizontal"
     android:padding="10dp"
-    android:background="@drawable/card_view">
+    android:background="@drawable/card_view"
+    android:id="@+id/menu_rv_card">
 
     <ImageView
         android:id="@+id/menu_rv_image"

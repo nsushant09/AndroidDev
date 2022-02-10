@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.menu_recycler_view_card.view.*
@@ -27,6 +28,11 @@ class MenuRecyclerAdapter(val context : Context, val imageList : ArrayList<Int> 
         holder.imageItem.setImageResource(image)
         holder.titleItem.text = title
         holder.descriptionItem.text = description
+
+        //onclick listener for recycler view Item
+        holder.cardItem.setOnClickListener{
+            Toast.makeText(context,"Clicked", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -34,6 +40,7 @@ class MenuRecyclerAdapter(val context : Context, val imageList : ArrayList<Int> 
     }
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
+        val cardItem = view.menu_rv_card
         val imageItem = view.menu_rv_image
         val titleItem = view.menu_rv_title
         val descriptionItem = view.menu_rv_description
