@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:minHeight="150dp"
     android:gravity="center"
-    android:background="@drawable/card_view"
-    android:layout_marginEnd="15dp"
+    android:background="@drawable/home_assign_card"
+    android:layout_marginEnd="16dp"
     android:paddingTop="5dp"
     android:paddingBottom="10dp"
     android:paddingHorizontal="5dp"
@@ -24,14 +24,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/dongleregular"
-            android:textSize="40sp"/>
+            android:textSize="40sp"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/home_assign_rv_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sourcesansproregular"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 

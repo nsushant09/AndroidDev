@@ -52,7 +52,11 @@ class StudentHomeFragment : Fragment() {
             "Deadline Approaching",
             "Event",
             "Registration Open",
-            "Examination Routine"
+            "Examination Routine",
+            "Notice",
+            "Notification",
+            "Notification",
+            "Notification"
 
         )
         return list
@@ -66,7 +70,12 @@ class StudentHomeFragment : Fragment() {
             "Your Science Project is due on 9th Feb",
             "The School is organizing a sports festival from 21th Feb",
             "The Registration for Sports Festival is open from tomorrow",
-            "Your Examination Routine has been published.\nCheck your respective examination schedule and examination hall from Events."
+            "Your Examination Routine has been published.\nCheck your respective examination schedule and examination hall from Events.",
+            "The College Management has decided to continue to physical classes after your examination ends.",
+            "This is a random text just provided as notification description to fully test the scroll View",
+            "This is a random text just provided as notification description to fully test the scroll View",
+            "This is a random text just provided as notification description to fully test the scroll View"
+
 
 
 
