@@ -76,9 +76,6 @@ class StudentHomeFragment : Fragment() {
             "This is a random text just provided as notification description to fully test the scroll View",
             "This is a random text just provided as notification description to fully test the scroll View"
 
-
-
-
         )
         return list
     }
@@ -108,10 +105,6 @@ class StudentHomeFragment : Fragment() {
             "Solve Question and Answer of Metals",
             "Prepare a Website that contains a table in it ",
             "Complete your pending works before examination"
-
-
-
-
 
         )
         return list

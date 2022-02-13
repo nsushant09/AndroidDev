@@ -14,9 +14,11 @@ class Student constructor(private var firstName: String,private var lastName : S
             val sushant = Student("Sushant","Neupane",10)
             val yogesh = Student("Yogesh","Bhatta",9)
             val utsab = Student("Utsab", "Sapkota",8)
+            val suprit = Student("Suprit", "Gautam", 7)
             studentList.add(sushant)
             studentList.add(yogesh)
             studentList.add(utsab)
+            studentList.add(suprit)
         }
 
     }
