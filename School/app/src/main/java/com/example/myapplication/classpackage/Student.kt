@@ -1,6 +1,4 @@
-package com.example.myapplication
-
-import android.app.AppComponentFactory
+package com.example.myapplication.classpackage
 
 class Student constructor(private var firstName: String,private var lastName : String,private var grade: Byte){
     companion object{

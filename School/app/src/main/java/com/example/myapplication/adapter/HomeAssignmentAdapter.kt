@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.classpackage.TodayAssignmentHome
 import kotlinx.android.synthetic.main.fragment_student_home.view.*
 import kotlinx.android.synthetic.main.home_assignment_rv_card.view.*
 import kotlinx.android.synthetic.main.home_notification_rv_card.view.*
 
-class HomeAssignmentAdapter(private val context : Context, private val subList : ArrayList<String> , private val descList : ArrayList<String>)
+class HomeAssignmentAdapter(private val context : Context, private val list : ArrayList<TodayAssignmentHome>)
     : RecyclerView.Adapter<HomeAssignmentAdapter.ViewHolder>()
 {
         inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
@@ -26,9 +27,9 @@ class HomeAssignmentAdapter(private val context : Context, private val subList :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.subItem.text = subList.get(position)
-        holder.descItem.text = descList.get(position)
+        holder.subItem.text = list.get(position).getSubject()
+        holder.descItem.text = list.get(position).getAssignment()
     }
 
-    override fun getItemCount(): Int = subList.size
+    override fun getItemCount(): Int = list.size
 }

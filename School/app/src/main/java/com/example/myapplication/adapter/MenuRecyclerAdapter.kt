@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.menu_recycler_view_card.view.*
 
-class MenuRecyclerAdapter(val context : Context, val imageList : ArrayList<Int> , val titleList : ArrayList<String>, val descriptionList : ArrayList<String> )
+class MenuRecyclerAdapter(val context : Context, val imageList : ArrayList<Int> ,
+                          val titleList : ArrayList<String>,
+                          val descriptionList : ArrayList<String> )
     : RecyclerView.Adapter<MenuRecyclerAdapter.ViewHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
