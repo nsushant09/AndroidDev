@@ -11,6 +11,8 @@ import com.example.bottomnavigationpractice.fragments.MessageFragment
 import com.example.bottomnavigationpractice.fragments.SettingsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
+
+//Build this app to have clear concept about fragments/ frame layout and specifically practise how to build a bottom navigation bar
 private val accountFragment = AccountFragment()
 private val homeFragment = HomeFragment()
 private val messageFragment = MessageFragment()
