@@ -13,6 +13,7 @@ import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
+    //An app for learning Practising recycler view
     var arrayName : ArrayList<String> = ArrayList<String>()
     var arrayAge : ArrayList<Int> = ArrayList<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
