@@ -32,22 +32,6 @@ class ItemAdapter (val context : Context, val items : ArrayList<String>, val ima
         holder.tvItem.text = item
         holder.ivItem.setImageResource(image)
 
-        //set background according to odd even position
-//        if(position%2==0){
-//            holder.cvItem.setBackgroundColor(
-//                ContextCompat.getColor(
-//                    context,R.color.teal_200
-//                )
-//            )
-//        }else{
-//            holder.cvItem.setBackgroundColor(
-//                ContextCompat.getColor(
-//                    context,R.color.teal_700
-//                )
-//            )
-//        }
-
-
     }
 
     override fun getItemCount(): Int {
