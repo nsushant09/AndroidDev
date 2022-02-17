@@ -17,6 +17,18 @@ class MainActivity : AppCompatActivity() {
             diceObject.roll()
             tvShowDiceNum.text = "The dice is rolled to : ${diceObject.getNum()}"
             imgDice.setImageResource(Dice.imageList.get(diceObject.getNum()-1))
+
+            if(diceObject.getNum() == diceObject.getLuckyNum()){
+                layoutMainActivity.setBackgroundColor(resources.getColor(R.color.green))
+                tvWin.text = "Congratulations !! You Win"
+                tvChange.text = "The lucky number is randomly selected again"
+                diceObject.changeLucky()
+            }else{
+                layoutMainActivity.setBackgroundColor(resources.getColor(R.color.gold))
+                tvWin.text = ""
+                tvChange.text = ""
+            }
+
         }
     }
 }
