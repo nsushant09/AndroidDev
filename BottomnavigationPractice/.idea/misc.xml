@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/bottom_navigation_bar_background.xml" value="0.271" />
+        <entry key="app/src/main/res/drawable/bottom_navigation_item_color.xml" value="0.285" />
         <entry key="app/src/main/res/drawable/navigation_bar_background.xml" value="0.271" />
         <entry key="app/src/main/res/drawable/top_templete_bg.xml" value="0.271" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4036458333333333" />
