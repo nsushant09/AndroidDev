@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.contactappusedfirebase.R
 import com.example.contactappusedfirebase.databinding.FragmentContactsBinding
 
@@ -12,8 +14,14 @@ class contactsFragment : Fragment() {
 
     //fragmentcontactbinding is the name of the layout i.e fragmetncontact.xml
     private var _binding : FragmentContactsBinding ?= null
+    //binding is set to _binding that is not null
     private val binding get() = _binding!!
+
+    //created and adapter of ContactAdapter
     private val adapter = ContactAdapter()
+
+    //created an object of ContactViewModel
+    private  lateinit var viewModel : ContactViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +31,11 @@ class contactsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //binding this Fragment to xml file fragment_contact.xml
         _binding = FragmentContactsBinding.inflate(inflater,container,false)
+
+        //initialized the viewModel to COntactViewModel
+        viewModel = ViewModelProviders.of(this).get(ContactViewModel::class.java)
         return binding.root
     }
 
@@ -33,11 +45,26 @@ class contactsFragment : Fragment() {
         //rvcontact is the id of recycler view in fragment contacts
         binding.rvContacts.adapter = adapter
 
+        //when floating button with + is cliked it shows the child Fragment which is AddContactDialogFragment
+        //more to learn about dialog
         binding.addButton.setOnClickListener{
             AddContactDialogFragment().show(childFragmentManager,"")
         }
+
+        //viewModel is object of ContactViewModel class whose contact list is being observed
+        //viewLifecycleOwner , Observer are default parameters for now
+
+        viewModel.contact.observe(viewLifecycleOwner, Observer {
+            //adapter is of recycler view which adds the contact item to mutable list in recycler view adapter
+            adapter.addContact(it)
+        })
+
+        //getRealTimeUpdate() of ContactViewModel is being called to notify changes
+        viewModel.getRealTimeUpdate()
+
     }
 
+    //thsi is a good practise to destroy
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

@@ -18,12 +18,16 @@ import com.example.contactappusedfirebase.databinding.FragmentAddContactDialogBi
 
 class AddContactDialogFragment : DialogFragment() {
 
+    //binding the fragment_add_contact_dialog to this class
     private var _binding : FragmentAddContactDialogBinding? = null
     private val binding get() = _binding!!
+
+    //late instantiation of object of ContactViewModel
     private lateinit var viewModel: ContactViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //setting the style of the alert dialog
         setStyle(STYLE_NO_TITLE, android.R.style.Theme_DeviceDefault_Light_Dialog_MinWidth)
 
     }
@@ -32,8 +36,10 @@ class AddContactDialogFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //current class is binded to the xml file
         _binding = FragmentAddContactDialogBinding.inflate(inflater,container,false)
 
+        //viewModel is instantiated
         viewModel = ViewModelProviders.of(this).get(ContactViewModel::class.java)
 
         return binding.root
@@ -52,10 +58,14 @@ class AddContactDialogFragment : DialogFragment() {
 
         })
 
+        //when save button is clicked
         binding.btnSaveContact.setOnClickListener{
+            //the text in inputLayoutname is stored as full name
             val fullName = binding.inputLayoutName.text.toString().trim()
+            //the text in inputLayoutContact is saved to contactNumber
             val contactNumber = binding.inputLayoutContact.text.toString().trim()
 
+            //if the full name is empty is prompts user there is an error
             if(fullName.isEmpty()){
                 binding.inputLayoutName.error = "This field is required"
                 return@setOnClickListener
@@ -65,10 +75,14 @@ class AddContactDialogFragment : DialogFragment() {
                 return@setOnClickListener
             }
 
+            //created and object of Contact Datatype
             val contact = Contact()
+            //the id is set automatically when addcContact is called
+            //set the fullName and contactNumber from editText
             contact.fullName = fullName
             contact.contactNumber = contactNumber
 
+            //the object is pass to addContact
             viewModel.addContact(contact)
 
         }
