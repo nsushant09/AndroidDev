@@ -8,31 +8,33 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.OrientationHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todorecycler.adapter.RecyclerAdapter
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.todorecycler.databinding.ActivityMainBinding
 import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding : ActivityMainBinding
     //An app for learning Practising recycler view
     var arrayName : ArrayList<String> = ArrayList<String>()
     var arrayAge : ArrayList<Int> = ArrayList<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //layoutmanager
-        rv.layoutManager = LinearLayoutManager(this)
+        binding.rv.layoutManager = LinearLayoutManager(this)
 
         //recycle view adapter
         var recyclerAdapter : RecyclerAdapter = RecyclerAdapter(this, arrayName, arrayAge)
 
 
-        btnAdd.setOnClickListener{
+        binding.btnAdd.setOnClickListener{
             try{
-                arrayName.add(editName.text.toString())
-                arrayAge.add(editAge.text.toString().toInt())
+                arrayName.add(binding.editName.text.toString())
+                arrayAge.add(binding.editAge.text.toString().toInt())
                 recyclerAdapter = RecyclerAdapter(this,arrayName,arrayAge)
-                rv.adapter = recyclerAdapter
+                binding.rv.adapter = recyclerAdapter
                 Toast.makeText(this, "Sucessfully added ",Toast.LENGTH_SHORT).show()
             }catch (e : Exception){
                 Toast.makeText(this,"Error",Toast.LENGTH_SHORT).show()
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //bind adapter to layout
-        rv.adapter = recyclerAdapter
+        binding.rv.adapter = recyclerAdapter
 
 
 
