@@ -2,12 +2,10 @@ package com.example.learnrecyclerview.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
-import com.example.learnrecyclerview.R
-import kotlinx.android.synthetic.main.item_custom_row.view.*
+import com.example.learnrecyclerview.databinding.ItemCustomRowBinding
 
 class ItemAdapter (val context : Context, val items : ArrayList<String>, val image: ArrayList<Int>) : RecyclerView.Adapter<ItemAdapter.ViewHolder>(){
 
@@ -15,11 +13,7 @@ class ItemAdapter (val context : Context, val items : ArrayList<String>, val ima
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         //return a view holder which is to be shown
         return ViewHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.item_custom_row,
-                parent,
-                false
-            )
+            ItemCustomRowBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         )
 
     }
@@ -38,9 +32,9 @@ class ItemAdapter (val context : Context, val items : ArrayList<String>, val ima
         return items.size
     }
 
-    class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
-        val tvItem = view.rv_textView
-        val ivItem = view.rv_imageView
-        val cvItem = view.card_view_item
+    class ViewHolder(binding :  ItemCustomRowBinding) : RecyclerView.ViewHolder(binding.root){
+        val tvItem = binding.rvTextView
+        val ivItem = binding.rvImageView
+        val cvItem = binding.cardViewItem
     }
 }
