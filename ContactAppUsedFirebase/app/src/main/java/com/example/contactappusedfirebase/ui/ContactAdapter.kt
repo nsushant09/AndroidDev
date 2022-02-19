@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactappusedfirebase.R
 import com.example.contactappusedfirebase.data.Contact
@@ -24,6 +25,12 @@ class ContactAdapter() : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
         //setting the recycler view cards views/elements
         holder.nameItem.text = contacts.get(position).fullName
         holder.numberItem.text = contacts.get(position).contactNumber
+        holder.titleItem.text = holder.nameItem.text.get(0).toString().uppercase()
+
+        if(position%2 == 0 ){
+            holder.titleItem.setBackgroundResource(R.drawable.contact_image_even)
+            holder.binding.rvLayout.setBackgroundResource(R.drawable.contact_background_even)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -35,6 +42,7 @@ class ContactAdapter() : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
         //reference to xml file views
         val nameItem = binding.tvName
         val numberItem = binding.tvContact
+        val titleItem = binding.tvTitle
     }
 
     @SuppressLint("NotifyDataSetChanged")

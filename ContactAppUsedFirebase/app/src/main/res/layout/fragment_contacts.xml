@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".contactsFragment">
+    tools:context="ui.contactsFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -22,8 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
         android:layout_margin="16dp"
+        android:background="@drawable/contact_image_bg"
         android:src="@drawable/ic_baseline_add_24"
         />
+
 
 
 

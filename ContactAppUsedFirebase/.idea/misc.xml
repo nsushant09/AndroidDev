@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.285" />
+        <entry key="app/src/main/res/drawable/contact_background.xml" value="0.285" />
+        <entry key="app/src/main/res/drawable/contact_background_even.xml" value="0.285" />
+        <entry key="app/src/main/res/drawable/contact_image_bg.xml" value="0.285" />
+        <entry key="app/src/main/res/drawable/contact_image_even.xml" value="0.285" />
         <entry key="app/src/main/res/drawable/edittext_contact_add_field.xml" value="0.285" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/fragment_add_contact_dialog.xml" value="0.33133817870884996" />
