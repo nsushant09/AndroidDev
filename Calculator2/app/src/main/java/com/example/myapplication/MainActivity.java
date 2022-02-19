@@ -65,13 +65,12 @@ public class MainActivity extends AppCompatActivity {
         TextView displayObj = findViewById(R.id.Display);
         TextView displayAll = findViewById(R.id.DisplayAll);
         displayObj.setTextSize(40);
-        String recieved = recieve_int;
-        if (!recieved.equals("C") && !recieved.equals("=")) {
+        if (!recieve_int.equals("C") && !recieve_int.equals("=")) {
             stringall.append(recieve_int);
             displayAll.setText(stringall);
         }
-        if (recieved.equals("+") || recieved.equals("-") || recieved.equals("*") || recieved.equals("/") || recieved.equals("=") || recieved.equals("C")) {
-            operation = recieved;
+        if (recieve_int.equals("+") || recieve_int.equals("-") || recieve_int.equals("*") || recieve_int.equals("/") || recieve_int.equals("=") || recieve_int.equals("C")) {
+            operation = recieve_int;
             first = total + "";
             if (operation.equals("+") || operation.equals("-")) {
                 second = "0";
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         } else {
-            second += recieved;
+            second += recieve_int;
         }
 
         switch (operation) {
