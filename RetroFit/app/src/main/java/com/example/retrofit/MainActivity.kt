@@ -4,13 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.recycler_card.*
+import com.example.retrofit.databinding.ActivityMainBinding
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
+//Base url of api
 const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 
+private lateinit var binding : ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,12 +20,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        rv.setHasFixedSize(true)
+        binding.rv.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
-        rv.layoutManager = linearLayoutManager
-        rv.layoutManager = LinearLayoutManager(this)
+        binding.rv.layoutManager = linearLayoutManager
+        binding.rv.layoutManager = LinearLayoutManager(this)
         getMyData()
 
 
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                     val responseList  = response.body()!!
                     todoAdapter = TodoAdapter(baseContext, responseList)
 //                    todoAdapter.notifyDataSetChanged()
-                    rv.adapter = todoAdapter
+                    binding.rv.adapter = todoAdapter
 //                    val todoAdapter = TodoAdapter(baseContext, responseList)
 //                    rv.adapter=todoAdapter
                 }

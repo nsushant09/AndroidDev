@@ -8,19 +8,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.recycler_card.view.*
-import kotlin.coroutines.coroutineContext
+import com.example.retrofit.databinding.RecyclerCardBinding
+
 
 class TodoAdapter(val context: Context, val list : List<Todo>) : RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
 
-    inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
-        val idItem = view.rv_id
-        val titleItem = view.rv_Title
+    inner class ViewHolder(view : RecyclerCardBinding) : RecyclerView.ViewHolder(view.root){
+        val idItem = view.rvId
+        val titleItem = view.rvTitle
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.recycler_card,parent,false)
+            RecyclerCardBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         )
     }
 
