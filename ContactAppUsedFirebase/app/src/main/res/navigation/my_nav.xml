@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/contactsFragment"
-        android:name="com.example.contactappusedfirebase.ui.contactsFragment"
+        android:name="com.example.contactappusedfirebase.ui.ContactsFragment"
         android:label="fragment_contacts"
         tools:layout="@layout/fragment_contacts" />
 </navigation>

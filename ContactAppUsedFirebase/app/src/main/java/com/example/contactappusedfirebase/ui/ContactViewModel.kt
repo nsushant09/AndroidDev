@@ -66,9 +66,20 @@ class ContactViewModel : ViewModel() {
         }
 
         override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+
+            val contact = snapshot.getValue(Contact::class.java)
+            contact?.id = snapshot.key
+            _contact.value = contact!!
+
         }
 
         override fun onChildRemoved(snapshot: DataSnapshot) {
+
+            val contact = snapshot.getValue(Contact::class.java)
+            contact?.id = snapshot.key
+            contact?.isDeleted = true
+            _contact.value = contact!!
+
         }
 
         override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
@@ -83,6 +94,26 @@ class ContactViewModel : ViewModel() {
     fun getRealTimeUpdate(){
         //firebase instance uses .addChildEventListener and passes the previously instantiated childEventListener object
         dbcontacts.addChildEventListener(childEventListener)
+    }
+
+    fun updateContact(contact: Contact){
+        dbcontacts.child(contact.id!!).setValue(contact).addOnCompleteListener{
+            if(it.isSuccessful){
+                _result.value = null
+            }else{
+                _result.value = it.exception
+            }
+        }
+    }
+
+    fun deleteContact(contact : Contact){
+        dbcontacts.child(contact.id!!).setValue(null).addOnCompleteListener{
+            if(it.isSuccessful){
+                _result.value = null
+            }else{
+                _result.value = it.exception
+            }
+        }
     }
 
     //this is a good practise to clear

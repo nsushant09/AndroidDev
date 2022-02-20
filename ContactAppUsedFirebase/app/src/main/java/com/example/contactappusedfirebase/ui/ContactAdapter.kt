@@ -50,6 +50,14 @@ class ContactAdapter() : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
         //when this method is called it checks if the contacts list contains the objects or not if it does not contains the object it then adds teh objects to the list
         if(!contacts.contains(contact)){
             contacts.add(contact)
+        }else{
+            val index  = contacts.indexOf(contact)
+            if(contact.isDeleted){
+                contacts.removeAt(index)
+            }else{
+                //if !contact.isDeleted then the contact is saved to the index of list
+                contacts[index] = contact
+            }
         }
         //the change to the list is notified
         notifyDataSetChanged()

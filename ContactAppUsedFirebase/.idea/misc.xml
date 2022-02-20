@@ -12,6 +12,8 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/fragment_add_contact_dialog.xml" value="0.33133817870884996" />
         <entry key="app/src/main/res/layout/fragment_contacts.xml" value="0.33133817870884996" />
+        <entry key="app/src/main/res/layout/fragment_delete_contact_dialog.xml" value="0.33133817870884996" />
+        <entry key="app/src/main/res/layout/fragment_update_contact_dialog.xml" value="0.33133817870884996" />
         <entry key="app/src/main/res/layout/recycler_view_contact.xml" value="0.33133817870884996" />
       </map>
     </option>
