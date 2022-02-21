@@ -3,6 +3,8 @@ package com.example.diceroller
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import androidx.core.graphics.drawable.toDrawable
 import com.example.diceroller.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -28,12 +30,12 @@ class MainActivity : AppCompatActivity() {
         binding.imgDice.setImageResource(Dice.imageList.get(diceObject.getNum()-1))
 
         if(diceObject.getNum() == diceObject.getLuckyNum()){
-            binding.layoutMainActivity.setBackgroundColor(resources.getColor(R.color.gold))
+            binding.layoutMainActivity.setBackgroundResource(R.color.gold)
             binding.tvWin.text = "Congratulations !! You Win"
             binding.tvChange.text = "The lucky number is randomly selected again"
             diceObject.changeLucky()
         }else{
-            binding.layoutMainActivity.setBackgroundColor(resources.getColor(R.color.silver))
+            binding.layoutMainActivity.setBackgroundResource(R.color.silver)
             binding.tvWin.text = ""
             binding.tvChange.text = ""
         }
