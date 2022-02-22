@@ -42,13 +42,10 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("PrivateResource")
     fun replaceFragment(fragment: Fragment){
         if(fragment!=null){
-            val fragmentTransition = supportFragmentManager.beginTransaction()
-//            fragmentTransition.setCustomAnimations(
-//                androidx.appcompat.R.anim.abc_popup_enter,
-//                androidx.appcompat.R.anim.abc_popup_exit
-//               )
-            fragmentTransition.replace(R.id.fragment_container,fragment)
-            fragmentTransition.commit()
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragment_container, fragment)
+                commit()
+            }
         }
     }
 }
