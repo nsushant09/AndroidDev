@@ -6,12 +6,13 @@
     android:elevation="50dp"
     app:cardUseCompatPadding="true"
     android:layout_height="match_parent">
+    <!--    The above height be match parent -->
 
     <ImageView
         android:id="@+id/imgSlider"
         android:layout_width="match_parent"
         android:scaleType="fitXY"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
         android:src="@mipmap/ic_launcher"
         />
 

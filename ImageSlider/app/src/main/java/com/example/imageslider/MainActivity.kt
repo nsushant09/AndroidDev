@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         comPosPageTarn.addTransformer { page, position ->
             val r : Float = 1 - Math.abs(position)
             page.scaleY = 0.85f + r * 0.15f
-
         }
         binding.viewPagerImgSlider.setPageTransformer(comPosPageTarn)
         sliderHandler = Handler()
