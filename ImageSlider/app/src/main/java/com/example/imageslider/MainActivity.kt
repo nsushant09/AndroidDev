@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        sliderItems()
+        itemSliderView()
     }
     private fun sliderItems() {
         imgList = ArrayList()
