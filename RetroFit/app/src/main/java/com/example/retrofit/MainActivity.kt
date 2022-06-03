@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var todoAdapter : TodoAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
+    var listFromResponse = ArrayList<Todo>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +29,6 @@ class MainActivity : AppCompatActivity() {
         binding.rv.layoutManager = linearLayoutManager
         binding.rv.layoutManager = LinearLayoutManager(this)
         getMyData()
-
-
-
     }
 
     private fun getMyData(){
@@ -48,7 +46,8 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Todo>?>, response: Response<List<Todo>?>) {
                 if(response.body()!=null){
                     val responseList  = response.body()!!
-                    todoAdapter = TodoAdapter(baseContext, responseList)
+                    listFromResponse = responseList as ArrayList<Todo>
+                    todoAdapter = TodoAdapter(baseContext, listFromResponse)
 //                    todoAdapter.notifyDataSetChanged()
                     binding.rv.adapter = todoAdapter
 //                    val todoAdapter = TodoAdapter(baseContext, responseList)
@@ -61,4 +60,5 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
 }
