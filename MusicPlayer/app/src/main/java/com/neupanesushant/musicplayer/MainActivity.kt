@@ -6,6 +6,7 @@ import android.media.MediaPlayer
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
@@ -18,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
     private lateinit var player : MediaPlayer
+    private lateinit var handler : Handler
+    private lateinit var runnable : Runnable
     private var isPause = false
     var playerDuration : Int = 0
     var newPosition : Int = 0
@@ -30,12 +33,16 @@ class MainActivity : AppCompatActivity() {
             onPlayClick()
 //            playFromLink("https://drive.google.com/file/d/1alBr10zk-prdnwctYPjWlREjFYNu3Dvr/view?usp=sharing")
         }
+        binding.btnResume.setOnClickListener{
+            onResumeClick()
+        }
         binding.btnPause.setOnClickListener{
             onPauseClick()
         }
         binding.btnStop.setOnClickListener{
             onStopClick()
         }
+        handler = Handler()
 
 
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
@@ -53,6 +60,17 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        runnable = object : Runnable {
+            override fun run() {
+                if(player.isPlaying){
+                    binding.seekBar.progress = player.currentPosition
+                    handler.postDelayed(this, 0)
+                }
+            }
+
+        }
+
+
     }
 
     fun onPlayClick(){
@@ -65,6 +83,14 @@ class MainActivity : AppCompatActivity() {
         binding.seekBar.max = playerDuration
         isPause = false
         player.start()
+        handler.postDelayed(runnable, 1000)
+
+
+    }
+
+    fun onResumeClick(){
+        player.start()
+        handler.postDelayed(runnable, 1000)
     }
 
     fun playFromLink(linkstring : String){
@@ -89,6 +115,7 @@ class MainActivity : AppCompatActivity() {
     fun onPauseClick(){
         if(player.isPlaying){
             player.pause()
+            handler.removeCallbacks(runnable)
             isPause = true
         }
     }
