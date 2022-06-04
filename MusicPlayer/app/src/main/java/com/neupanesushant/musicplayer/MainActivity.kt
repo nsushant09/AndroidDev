@@ -1,18 +1,26 @@
 package com.neupanesushant.musicplayer
 
 import android.app.Activity
+import android.media.AudioAttributes
 import android.media.MediaPlayer
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.Toast
 import com.neupanesushant.musicplayer.databinding.ActivityMainBinding
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
     private lateinit var player : MediaPlayer
     private var isPause = false
+    var playerDuration : Int = 0
+    var newPosition : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.btnPlay.setOnClickListener{
             onPlayClick()
+//            playFromLink("https://drive.google.com/file/d/1alBr10zk-prdnwctYPjWlREjFYNu3Dvr/view?usp=sharing")
         }
         binding.btnPause.setOnClickListener{
             onPauseClick()
@@ -27,6 +36,23 @@ class MainActivity : AppCompatActivity() {
         binding.btnStop.setOnClickListener{
             onStopClick()
         }
+
+
+        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                binding.tvShowProgress.text = p1.toString()
+                newPosition = p1
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+                player.seekTo(newPosition)
+            }
+        })
+
     }
 
     fun onPlayClick(){
@@ -35,7 +61,29 @@ class MainActivity : AppCompatActivity() {
         player.setOnCompletionListener {
             stopplayer()
         }
+        playerDuration = player.duration
+        binding.seekBar.max = playerDuration
+        isPause = false
         player.start()
+    }
+
+    fun playFromLink(linkstring : String){
+        try{
+            player = MediaPlayer().apply{
+                setAudioAttributes(
+                    AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .build()
+                )
+                setDataSource(linkstring)
+                prepare()
+                start()
+            }
+        }catch (e : Exception){
+            Toast.makeText(this, "Error while loading url", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     fun onPauseClick(){
@@ -53,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         if(player.isPlaying || isPause){
             player.release()
             Toast.makeText(this, "MediaPlayer released", Toast.LENGTH_SHORT).show()
+            isPause = false
         }
     }
 
