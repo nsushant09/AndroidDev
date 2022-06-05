@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnPlay.setOnClickListener{
-            onPlayClick()
-//            playFromLink("https://drive.google.com/file/d/1alBr10zk-prdnwctYPjWlREjFYNu3Dvr/view?usp=sharing")
+//            onPlayClick()
+            playFromLink("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3")
         }
         binding.btnResume.setOnClickListener{
             onResumeClick()
@@ -89,26 +89,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onResumeClick(){
-        player.start()
         handler.postDelayed(runnable, 1000)
+        player.start()
     }
 
     fun playFromLink(linkstring : String){
+        player = MediaPlayer()
+        player.setAudioAttributes(
+            AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .build()
+        )
         try{
-            player = MediaPlayer().apply{
-                setAudioAttributes(
-                    AudioAttributes.Builder()
-                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                        .setUsage(AudioAttributes.USAGE_MEDIA)
-                        .build()
-                )
-                setDataSource(linkstring)
-                prepare()
-                start()
-            }
+                player.setDataSource(linkstring)
+                player.prepare()
+                player.start()
+
         }catch (e : Exception){
             Toast.makeText(this, "Error while loading url", Toast.LENGTH_SHORT).show()
         }
+        binding.seekBar.max = player.duration
+        isPause = false
+        handler.postDelayed(runnable, 1000)
 
     }
 
