@@ -25,13 +25,18 @@ class MainActivity : AppCompatActivity() {
         getContentData()
         binding.btnNext.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
+
+                binding.progressBar.visibility = View.VISIBLE
+                binding.relativeLayout.visibility = View.GONE
+                binding.btnNext.visibility = View.GONE
                 getContentData()
             }
 
         })
+
     }
 
-    fun getContentData(){
+    fun getContentData() {
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
@@ -51,6 +56,10 @@ class MainActivity : AppCompatActivity() {
                     binding.tvQuote.text = quote
                     binding.tvAuthor.text = author
 
+                    binding.progressBar.visibility = View.GONE
+                    binding.relativeLayout.visibility = View.VISIBLE
+                    binding.btnNext.visibility = View.VISIBLE
+
                 }
             }
 
@@ -59,5 +68,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
     }
 }

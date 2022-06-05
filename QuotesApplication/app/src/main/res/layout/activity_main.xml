@@ -9,13 +9,23 @@
     android:gravity="center"
     >
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:progressDrawable="@drawable/customprogressbar"
+        />
+
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="32dp"
         android:gravity="center_vertical"
         android:orientation="vertical"
+        android:visibility="gone"
 
         >
 
@@ -26,6 +36,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/bahnschrift"
             android:gravity="center"
+            android:justificationMode="inter_word"
             android:textColor="@color/black"
             android:textSize="24sp" />
 
@@ -46,8 +57,8 @@
         android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:text = "Next"
+        android:visibility="gone"
         android:backgroundTint="@color/material_dynamic_primary30"
         />
 
