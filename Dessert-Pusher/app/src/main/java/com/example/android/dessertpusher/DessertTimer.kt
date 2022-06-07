@@ -19,6 +19,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import timber.log.Timber
+import java.io.Serializable
 
 /**
  * This is a class representing a timer that you can start or stop. The secondsCount outputs a count of

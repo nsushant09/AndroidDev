@@ -18,6 +18,9 @@ package com.example.android.dessertpusher
 
 import android.content.ActivityNotFoundException
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -27,7 +30,9 @@ import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleObserver
 import com.example.android.dessertpusher.databinding.ActivityMainBinding
+import com.google.gson.Gson
 import timber.log.Timber
+import java.io.Serializable
 
 class MainActivity : AppCompatActivity(), LifecycleObserver {
 
@@ -80,12 +85,30 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
         dessertTimer = DessertTimer(lifecycle)
 
+        if(savedInstanceState != null){
+            revenue = savedInstanceState.getInt("keyRevenue")
+//            dessertTimer = savedInstanceState.getSerializable("keyDessertTimer") as DessertTimer
+            dessertsSold = savedInstanceState.getInt("keyDessertSold")
+//            currentDessert = savedInstanceState.getSerializable("keyCurrentDessert") as Dessert
+            Timber.i("Restore all values")
+        }
         // Set the TextViews to the right values
         binding.revenue = revenue
         binding.amountSold = dessertsSold
 
         // Make sure the correct dessert is showing
         binding.dessertButton.setImageResource(currentDessert.imageId)
+
+    }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("keyRevenue", revenue)
+        outState.putInt("keyDessertSold", dessertsSold)
+//        outState.putSerializable("keyCurrentDessert", currentDessert)
+//        outState.putSerializable("keyDessertTimer", dessertTimer)
+         Timber.i("onSaveInstanceStateCalled")
     }
 
     /**
