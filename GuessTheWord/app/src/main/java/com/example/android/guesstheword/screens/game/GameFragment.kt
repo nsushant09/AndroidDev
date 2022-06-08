@@ -25,8 +25,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
 
@@ -53,33 +52,32 @@ class GameFragment : Fragment() {
 
         Log.i("GameFragment", "Called ViewModelProvideOF")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+        binding.gameViewModel = viewModel
+        binding.setLifecycleOwner(this)
+
         viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
             binding.scoreText.text = newScore.toString()
         })
         viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
             binding.wordText.text = newWord
         })
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
+//        viewModel.timeLeft.observe(viewLifecycleOwner, Observer{ timeleft ->
+//            binding.timerText.text = DateUtils.formatElapsedTime(timeleft/1000)
+//        })
+        viewModel.eventGameFinished.observe(viewLifecycleOwner, Observer { hasFinished ->
+            if(hasFinished){
+                gameFinished()
+                viewModel.onGameFinishComplete()
+            }
+        })
         return binding.root
+
 
     }
 
-    /**
-     * Resets the list of words and randomizes the order
-     */
-
-
-    /**
-     * Called when the game is finished
-     */
-    private fun gameFinished() {
+    fun gameFinished() {
         val action = GameFragmentDirections.actionGameToScore(viewModel.score.value ?: 0)
-        findNavController(this).navigate(action)
+        NavHostFragment.findNavController(this).navigate(action)
     }
 
 
