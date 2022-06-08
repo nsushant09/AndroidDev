@@ -1,8 +1,12 @@
 package com.example.retrofit
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.retrofit.databinding.ActivityMainBinding
 import retrofit2.*
@@ -16,49 +20,26 @@ private lateinit var binding : ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     lateinit var todoAdapter : TodoAdapter
+    lateinit var viewModel : MainViewModel
     lateinit var linearLayoutManager: LinearLayoutManager
     var listFromResponse = ArrayList<Todo>()
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding.rv.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         binding.rv.layoutManager = linearLayoutManager
         binding.rv.layoutManager = LinearLayoutManager(this)
-        getMyData()
-    }
-
-    private fun getMyData(){
-        //create an object of retrofitToApi class
-        val retrofit = Retrofit
-        .Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL)
-            .build()
-            .create(TodoApi::class.java)
-
-        val retrofitData = retrofit.getData()
-
-        retrofitData.enqueue(object : Callback<List<Todo>?> {
-            override fun onResponse(call: Call<List<Todo>?>, response: Response<List<Todo>?>) {
-                if(response.body()!=null){
-                    val responseList  = response.body()!!
-                    listFromResponse = responseList as ArrayList<Todo>
-                    todoAdapter = TodoAdapter(baseContext, listFromResponse)
-//                    todoAdapter.notifyDataSetChanged()
-                    binding.rv.adapter = todoAdapter
-//                    val todoAdapter = TodoAdapter(baseContext, responseList)
-//                    rv.adapter=todoAdapter
-                }
-            }
-
-            override fun onFailure(call: Call<List<Todo>?>, t: Throwable) {
-                Toast.makeText(baseContext, "Could not load data",Toast.LENGTH_SHORT).show()
-            }
+        viewModel.listOfData.observe(this, Observer{
+            todoAdapter = TodoAdapter(baseContext, it!!)
+            binding.rv.adapter = todoAdapter
+            todoAdapter.notifyDataSetChanged()
+            Log.i("MainViewModel", "DataSetChanged")
         })
     }
-
 }
