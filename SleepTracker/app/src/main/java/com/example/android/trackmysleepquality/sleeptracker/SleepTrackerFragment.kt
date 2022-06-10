@@ -22,8 +22,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.trackmysleepquality.R
+import com.example.android.trackmysleepquality.SleepDetailsAdapter
 import com.example.android.trackmysleepquality.database.SleepDatabase
 import com.example.android.trackmysleepquality.databinding.FragmentSleepTrackerBinding
 
@@ -53,6 +56,20 @@ class SleepTrackerFragment : Fragment() {
         binding.viewModel = viewModel
         binding.setLifecycleOwner(this)
 
+//        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+//        var adapter = SleepDetailsAdapter(listOfNotNull())
+//        binding.recyclerView.adapter = adapter
+//        viewModel.nights.observe(viewLifecycleOwner, Observer{
+//            adapter = SleepDetailsAdapter(it)
+//            binding.recyclerView.adapter = adapter
+//        })
+        val adapter = SleepDetailsAdapter()
+        binding.recyclerView.adapter = adapter
+        viewModel.nights.observe(viewLifecycleOwner, Observer{
+            adapter.list = it
+        })
+
         return binding.root
     }
+
 }
