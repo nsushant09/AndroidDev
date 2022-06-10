@@ -41,5 +41,7 @@ class MainActivity : AppCompatActivity() {
             todoAdapter.notifyDataSetChanged()
             Log.i("MainViewModel", "DataSetChanged")
         })
+
     }
+
 }
