@@ -42,19 +42,18 @@ class SleepTrackerFragment : Fragment() {
      *
      * This function uses DataBindingUtil to inflate R.layout.fragment_sleep_quality.
      */
+    private lateinit var _binding : FragmentSleepTrackerBinding
+    private val binding get() = _binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         // Get a reference to the binding object and inflate the fragment views.
-        val binding: FragmentSleepTrackerBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_sleep_tracker, container, false)
+        _binding = FragmentSleepTrackerBinding.inflate(layoutInflater)
 
         val application = requireNotNull(this.activity).application
         val dataSource = SleepDatabase.getInstance(application).sleepDatabaseDao
         val viewModelFactory = SleepTrackerViewModelFactory(dataSource, application)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(SleepTrackerViewModel::class.java)
-        binding.viewModel = viewModel
-        binding.setLifecycleOwner(this)
 
 //        binding.recyclerView.layoutManager = LinearLayoutManager(context)
 //        var adapter = SleepDetailsAdapter(listOfNotNull())
@@ -63,11 +62,10 @@ class SleepTrackerFragment : Fragment() {
 //            adapter = SleepDetailsAdapter(it)
 //            binding.recyclerView.adapter = adapter
 //        })
-        val adapter = SleepDetailsAdapter()
-        binding.recyclerView.adapter = adapter
-        viewModel.nights.observe(viewLifecycleOwner, Observer{
-            adapter.list = it
-        })
+////        val adapter = SleepDetailsAdapter()
+//        binding.stopButton.setOnClickListener {
+//            viewModel.onStopTracking()
+//        }
 
         return binding.root
     }
