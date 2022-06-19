@@ -3,7 +3,6 @@
     android:interpolator="@android:anim/bounce_interpolator"
     >
 
-    <!-- Use your working translate animation here-->
     <translate
         android:duration="3000"
         android:fromYDelta="-100%"
