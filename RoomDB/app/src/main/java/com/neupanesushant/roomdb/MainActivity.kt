@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.addUser(User(0, "Sushant", "Neupane", 19))
         viewModel.readAllData.observe(this, Observer {
             Log.i("MainActivity", "The username is ${viewModel.readAllData.value?.get(0)?.firstName}")
+
         })
     }
 }
