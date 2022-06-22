@@ -11,9 +11,9 @@
     <TextView
         android:id="@+id/Display"
         android:layout_width="295dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginStart="82dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="79dp"
         android:layout_marginBottom="496dp"
         android:textAlignment="viewEnd"
@@ -30,16 +30,16 @@
     <TextView
         android:id="@+id/DisplayAll"
         android:layout_width="295dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:maxLines="1"
         android:layout_marginStart="59dp"
-        android:layout_marginTop="86dp"
         android:layout_marginEnd="57dp"
         android:textAlignment="viewEnd"
         android:textSize="40sp"
         android:textColor="#F8EFE4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/Display" />
 
     <Button
         android:id="@+id/num4"
@@ -106,7 +106,7 @@
         app:layout_constraintBottom_toTopOf="@+id/num5"
         app:layout_constraintEnd_toStartOf="@+id/num3"
         app:layout_constraintStart_toEndOf="@+id/num1"
-        app:layout_constraintTop_toBottomOf="@+id/Display"
+        app:layout_constraintTop_toBottomOf="@+id/DisplayAll"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
@@ -157,7 +157,7 @@
         app:layout_constraintBottom_toTopOf="@+id/oper_sub"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/num3"
-        app:layout_constraintTop_toBottomOf="@+id/Display" />
+        app:layout_constraintTop_toBottomOf="@+id/DisplayAll" />
 
     <Button
         android:id="@+id/oper_equal"
@@ -260,7 +260,7 @@
         app:layout_constraintBottom_toTopOf="@+id/num6"
         app:layout_constraintEnd_toStartOf="@+id/oper_add"
         app:layout_constraintStart_toEndOf="@+id/num2"
-        app:layout_constraintTop_toBottomOf="@+id/Display" />
+        app:layout_constraintTop_toBottomOf="@+id/DisplayAll" />
 
     <Button
         android:id="@+id/num1"
@@ -277,7 +277,7 @@
         app:layout_constraintBottom_toTopOf="@+id/num4"
         app:layout_constraintEnd_toStartOf="@+id/num2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Display" />
+        app:layout_constraintTop_toBottomOf="@+id/DisplayAll" />
 
     <Button
         android:id="@+id/num8"
