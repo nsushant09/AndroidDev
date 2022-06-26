@@ -1,17 +1,19 @@
 package com.neupanesushant.localnotification
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Message
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.neupanesushant.localnotification.databinding.ActivityMainBinding
+import java.text.DateFormat
+import java.time.LocalDate
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val CHANNEL_ID = "channelID"
@@ -39,11 +41,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnShowNotification.setOnClickListener{
             with(NotificationManagerCompat.from(this)){
-                notify(9122, builder.build())
+                notify(1, builder.build())
             }
         }
-    }
 
+
+
+    }
 
     private fun createNotificationChannel() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -71,7 +75,5 @@ class MainActivity : AppCompatActivity() {
             .setAutoCancel(true)
 
         // for longer longer i.e more lines than 1 you should use .setstyle().bigtext().
-
-
     }
 }
