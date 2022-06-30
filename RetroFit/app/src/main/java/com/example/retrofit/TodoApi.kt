@@ -10,6 +10,6 @@ import retrofit2.http.Query
 interface TodoApi {
 
     @GET("todos")
-    fun getData() : Call<List<Todo>>
+    suspend fun getData() : List<Todo>
 
 }
