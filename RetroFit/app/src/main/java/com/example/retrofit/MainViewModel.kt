@@ -19,38 +19,15 @@ class MainViewModel : ViewModel(){
         getMyData()
     }
     private fun getMyData(){
-        //create an object of retrofitToApi class
-        val retrofit = Retrofit
-            .Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL)
-            .build()
-            .create(TodoApi::class.java)
-
         viewModelScope.launch{
             try{
-                listOfData.value = retrofit.getData()
+                listOfData.value = TodoApiService.retrofitService.getData()
                 Log.i("MainViewModel", "Response Coroutine is successfull")
             }catch(e : Exception){
                 listOfData.value = listOfNotNull()
                 Log.i("MainViewModel", "Response Coroutine is not successfull")
             }
         }
-
-//        retrofitData.enqueue(object : Callback<List<Todo>?> {
-//            override fun onResponse(call: Call<List<Todo>?>, response: Response<List<Todo>?>) {
-//                if(response.body()!=null){
-//                    val responseList  = response.body()!!
-//                    val listFromResponse = responseList as List<Todo>
-//                    Log.i("MainViewModel", "Response is saved to list")
-//                    listOfData.value = listFromResponse
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<List<Todo>?>, t: Throwable) {
-//                Log.i("MainViewModel", "Failed to get response")
-//            }
-//        })
     }
 
 }
