@@ -11,15 +11,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.retrofit.databinding.ActivityMainBinding
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
-//Base url of api
-const val BASE_URL = "https://jsonplaceholder.typicode.com/"
-
-private lateinit var binding : ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityMainBinding
 
     lateinit var todoAdapter : TodoAdapter
     lateinit var viewModel : MainViewModel
@@ -32,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = getViewModel()
         binding.rv.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         binding.rv.layoutManager = linearLayoutManager

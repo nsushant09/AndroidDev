@@ -12,7 +12,9 @@ import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MainViewModel : ViewModel(){
+class MainViewModel(
+    val todoRetrofitService : TodoApi
+) : ViewModel(){
     val listOfData = MutableLiveData<List<Todo>>()
     init{
         listOfData.value = listOfNotNull()
@@ -21,7 +23,7 @@ class MainViewModel : ViewModel(){
     private fun getMyData(){
         viewModelScope.launch{
             try{
-                listOfData.value = TodoApiService.retrofitService.getData()
+                listOfData.value = todoRetrofitService.getData()
                 Log.i("MainViewModel", "Response Coroutine is successfull")
             }catch(e : Exception){
                 listOfData.value = listOfNotNull()
