@@ -13,12 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RetroFit">
         <activity
-            android:name=".PractiseActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PostActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
