@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.btnPlay.setOnClickListener{
 //            onPlayClick()
-            playFromLink("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3")
+            playFromLink("https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/62/38/72/623872c3-76b7-39e4-22d2-f2a9c41e5d34/mzaf_5795569473118457876.plus.aac.p.m4a")
         }
         binding.btnResume.setOnClickListener{
             onResumeClick()
