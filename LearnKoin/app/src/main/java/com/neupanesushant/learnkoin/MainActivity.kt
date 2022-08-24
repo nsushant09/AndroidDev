@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity(), AndroidScopeComponent {
         Log.i("MainViewModel", "$hello")
         viewModel = getViewModel<MainViewModel>()
         viewModel.doNetworkCall()
+
+
+        //this is just a test to create an instance using koin
+//        val retrofit by inject<MyApi>(named("retrofitInstance"))
     }
 
     override val scope: Scope by activityScope()
