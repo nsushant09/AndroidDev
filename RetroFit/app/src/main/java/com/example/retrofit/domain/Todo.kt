@@ -1,4 +1,4 @@
-package com.example.retrofit
+package com.example.retrofit.domain
 
 data class Todo(
     val completed: Boolean,
