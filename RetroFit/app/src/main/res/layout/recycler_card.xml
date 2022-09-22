@@ -1,45 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
+    android:background="@drawable/recyclerview_bg"
+    android:layout_marginHorizontal="16dp"
     android:gravity="center"
-    android:layout_marginVertical="20dp"
-    android:background="@color/black"
+    android:layout_marginVertical="4dp"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="4dp"
     >
 
-    <TextView
-        android:id="@+id/rv_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1"
-        android:paddingHorizontal="10dp"
-        android:textColor="@color/white"
-        />
+    <androidx.cardview.widget.CardView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
 
-    <TextView
-        android:id="@+id/rv_Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello"
-        android:paddingHorizontal="10dp"
-        android:textColor="@color/white"
-        />
-    <TextView
-        android:id="@+id/rv_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
-        android:textColor="@color/white"
-        />
-    <TextView
-        android:id="@+id/rv_useremail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
-        android:textColor="@color/white"
-        />
+        style="?attr/recyclerElement_cardStyle"
+        >
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
 
+            <TextView
+                android:id="@+id/ivAvatar"
 
-</LinearLayout>
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvName"
+                app:layout_constraintBottom_toBottomOf="@id/tvEmail"
+
+                style="?attr/avatarTextViewStyle"
+                android:background="@drawable/avatar_bg_blue"
+                />
+
+            <TextView
+                android:id="@+id/tvName"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/ivAvatar"
+
+                android:text="Sushant Neupane"
+                style="?attr/titleNameTextStyle"
+                />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                app:layout_constraintLeft_toRightOf="@id/ivAvatar"
+                app:layout_constraintTop_toBottomOf="@id/tvName"
+
+                style="@style/TitleEmailTextStylings"
+                android:text="nsushant09@gmail.com"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

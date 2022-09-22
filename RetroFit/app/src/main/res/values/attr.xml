@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <attr name="recyclerElement_cardStyle" format="reference"/>
+    <attr name="avatarTextViewStyle" format="reference"/>
+    <attr name="titleNameTextStyle" format="reference"/>
+    <attr name="titleEmailTextStyle" format="reference"/>
+    <attr name="searchInputLayout" format="reference"/>
+
+</resources>

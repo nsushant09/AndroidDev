@@ -4,5 +4,6 @@ class RouteCodeConfig {
     companion object{
         val TODOS = "TODOS"
         val USERS = "USERS"
+        val POSTS = "POSTS"
     }
 }

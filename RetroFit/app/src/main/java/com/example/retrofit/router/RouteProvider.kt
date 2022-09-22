@@ -12,6 +12,7 @@ class RouteProvider(val mBaseUrl : String) {
     private fun initializeRoutes(){
         routes.put(RouteCodeConfig.TODOS, "todos")
         routes.put(RouteCodeConfig.USERS, "users")
+        routes.put(RouteCodeConfig.POSTS, "posts")
     }
 
     fun getUrl(routeCode : String) : Observable<Route>{
