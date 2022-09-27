@@ -1,8 +1,10 @@
-package com.neupanesushant.rxjava_subject_application.domain
+package com.example.retrofit.domain
+
+import java.io.Serializable
 
 data class Todo(
-    val completed: Boolean,
-    val id: Int,
-    val title: String,
-    val userId: Int
+    val completed: Boolean? = null,
+    val id: Int? = null,
+    val title: String? = null,
+    val userId: Int? = null
 )

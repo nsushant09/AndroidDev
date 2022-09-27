@@ -1,10 +1,23 @@
 package com.example.retrofit.domain
 
 import android.util.Log
+import com.example.retrofit.data.TodoRepositoryImpl
 import io.reactivex.rxjava3.core.Observable
-import kotlin.math.min
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class TodoUseCase(val todoRepository: TodoRepository, val userUserUseCase: UserUseCase,val postUseCase: PostUseCase){
+class TodoUseCase(
+//    val todoRepository: TodoRepository, val userUserUseCase: UserUseCase,val postUseCase: PostUseCase
+    ) : KoinComponent{
+
+
+//    val todoRepository = TodoRepositoryImpl()
+//    val userUserUseCase = UserUseCase()
+//    val postUseCase = PostUseCase()
+
+    val todoRepository : TodoRepositoryImpl by inject()
+    val userUserUseCase : UserUseCase by inject()
+    val postUseCase : PostUseCase by inject()
 
     fun requestData() : Observable<List<Todo>> = todoRepository.requestData()
 
@@ -43,7 +56,7 @@ class TodoUseCase(val todoRepository: TodoRepository, val userUserUseCase: UserU
                 return middleIndex
             }
 
-            if(value < numbers[middleIndex].id){
+            if(value < numbers[middleIndex].id!!){
                 lastIndex = middleIndex - 1
                 middleIndex = (firstIndex + lastIndex) / 2
             }else{

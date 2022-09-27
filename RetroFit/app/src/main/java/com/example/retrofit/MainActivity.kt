@@ -3,31 +3,28 @@ package com.example.retrofit
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.retrofit.databinding.ActivityMainBinding
-import com.example.retrofit.domain.Todo
-import com.example.retrofit.domain.User
 import com.example.retrofit.vm.MainViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
 
     lateinit var todoAdapter : TodoAdapter
-    val viewModel : MainViewModel by viewModel<MainViewModel>()
+//    val viewModel : MainViewModel by viewModel<MainViewModel>()
+    lateinit var viewModel : MainViewModel
     lateinit var linearLayoutManager: LinearLayoutManager
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         setContentView(binding.root)
 
 

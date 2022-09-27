@@ -3,7 +3,6 @@ package com.example.retrofit
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
@@ -82,7 +81,7 @@ class TodoAdapter(val context: Context, var list : List<HashMap<Todo, User>>) : 
                 list = if(results?.values == null){
                     ArrayList()
                 }else{
-                    results.values as List<HashMap<Todo, User> /* = java.util.HashMap<com.example.retrofit.domain.Todo, com.example.retrofit.domain.User> */>
+                    results.values as List<HashMap<Todo, User> /* = java.util.HashMap<com.neupanesushant.rxjava_subject_application.domain.Todo, com.example.retrofit.domain.User> */>
                 }
                 notifyDataSetChanged()
             }

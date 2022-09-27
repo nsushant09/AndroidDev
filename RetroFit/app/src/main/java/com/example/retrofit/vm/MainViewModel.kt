@@ -1,20 +1,21 @@
 package com.example.retrofit.vm
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.retrofit.domain.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 
 class MainViewModel(
-    val todoUseCase: TodoUseCase
-) : ViewModel() {
+//    val todoUseCase: TodoUseCase
+) : ViewModel() , KoinComponent{
 
+    val todoUseCase :TodoUseCase = get()
     private val _listOfData = MutableLiveData<List<HashMap<Todo, User>>>()
     val listOfData get() : LiveData<List<HashMap<Todo, User>>> = _listOfData
 
