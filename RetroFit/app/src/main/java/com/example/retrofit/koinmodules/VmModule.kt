@@ -9,6 +9,6 @@ fun vmModule() = module {
 //        MainViewModel(get())
 //    }
 
-    viewModel{MainViewModel()}
+    viewModel { MainViewModel() }
 
 }

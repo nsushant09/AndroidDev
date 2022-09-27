@@ -8,11 +8,16 @@ import com.example.retrofit.koinmodules.vmModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class MyApplication: Application() {
+class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val modules = listOf(domainModule(), netModule(Constants.BASE_URL, this), vmModule(), overrideDomainModule())
+        val modules = listOf(
+            domainModule(),
+            netModule(Constants.BASE_URL, this),
+            vmModule(),
+            overrideDomainModule()
+        )
         startKoin {
             androidContext(this@MyApplication)
             allowOverride(true)

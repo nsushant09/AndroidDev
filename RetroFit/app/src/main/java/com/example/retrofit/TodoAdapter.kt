@@ -9,19 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofit.databinding.RecyclerCardBinding
 import com.example.retrofit.domain.Todo
 import com.example.retrofit.domain.User
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 import kotlin.random.Random
 
 
-class TodoAdapter(val context: Context, var list : List<HashMap<Todo, User>>) : RecyclerView.Adapter<TodoAdapter.ViewHolder>(), Filterable {
+class TodoAdapter(val context: Context, var list: List<HashMap<Todo, User>>) :
+    RecyclerView.Adapter<TodoAdapter.ViewHolder>(), Filterable {
 
     val backupList = list
 
     var listFiltered = ArrayList<HashMap<Todo, User>>()
 
-    inner class ViewHolder(view : RecyclerCardBinding) : RecyclerView.ViewHolder(view.root){
+    inner class ViewHolder(view: RecyclerCardBinding) : RecyclerView.ViewHolder(view.root) {
         val avatar = view.ivAvatar
         val name = view.tvName
         val email = view.tvEmail
@@ -29,7 +27,7 @@ class TodoAdapter(val context: Context, var list : List<HashMap<Todo, User>>) : 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            RecyclerCardBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            RecyclerCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -39,7 +37,7 @@ class TodoAdapter(val context: Context, var list : List<HashMap<Todo, User>>) : 
         val userObj = list.get(position).values.elementAt(0)
 
 
-        val random = Random.nextInt(1,6)
+        val random = Random.nextInt(1, 6)
         when (random) {
             1 -> holder.avatar.setBackgroundResource(R.drawable.avatar_bg_blue)
             2 -> holder.avatar.setBackgroundResource(R.drawable.avatar_bg_cream)
@@ -66,21 +64,24 @@ class TodoAdapter(val context: Context, var list : List<HashMap<Todo, User>>) : 
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val string = constraint?.toString() ?: ""
 
-                if(string.isEmpty()) listFiltered = backupList as ArrayList<HashMap<Todo, User>>else {
+                if (string.isEmpty()) listFiltered =
+                    backupList as ArrayList<HashMap<Todo, User>> else {
                     val filteredList = ArrayList<HashMap<Todo, User>>()
-                    list.filter{
-                        (it.values.elementAt(0).name.contains(string)) or (it.values.elementAt(0).email.contains(string))
+                    list.filter {
+                        (it.values.elementAt(0).name.contains(string)) or (it.values.elementAt(0).email.contains(
+                            string
+                        ))
                     }
-                        .forEach{filteredList.add(it)}
+                        .forEach { filteredList.add(it) }
                     listFiltered = filteredList
                 }
-                return FilterResults().apply{values = listFiltered}
+                return FilterResults().apply { values = listFiltered }
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                list = if(results?.values == null){
+                list = if (results?.values == null) {
                     ArrayList()
-                }else{
+                } else {
                     results.values as List<HashMap<Todo, User> /* = java.util.HashMap<com.neupanesushant.rxjava_subject_application.domain.Todo, com.example.retrofit.domain.User> */>
                 }
                 notifyDataSetChanged()

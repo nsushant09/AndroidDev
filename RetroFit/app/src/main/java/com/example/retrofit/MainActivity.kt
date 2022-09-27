@@ -1,9 +1,9 @@
 package com.example.retrofit
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,11 +13,12 @@ import com.example.retrofit.vm.MainViewModel
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
-    lateinit var todoAdapter : TodoAdapter
-//    val viewModel : MainViewModel by viewModel<MainViewModel>()
-    lateinit var viewModel : MainViewModel
+    lateinit var todoAdapter: TodoAdapter
+
+    //    val viewModel : MainViewModel by viewModel<MainViewModel>()
+    lateinit var viewModel: MainViewModel
     lateinit var linearLayoutManager: LinearLayoutManager
 
     @SuppressLint("NotifyDataSetChanged")
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         binding.rv.layoutManager = linearLayoutManager
         binding.rv.layoutManager = LinearLayoutManager(this)
         searchInputTextListener()
-        viewModel.listOfData.observe(this, Observer{
+        viewModel.listOfData.observe(this, Observer {
             todoAdapter = TodoAdapter(baseContext, it!!)
             binding.rv.adapter = todoAdapter
             todoAdapter.notifyDataSetChanged()
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun searchInputTextListener(){
+    fun searchInputTextListener() {
         binding.etSearch.addTextChangedListener {
 
             todoAdapter.filter.filter(it.toString())
