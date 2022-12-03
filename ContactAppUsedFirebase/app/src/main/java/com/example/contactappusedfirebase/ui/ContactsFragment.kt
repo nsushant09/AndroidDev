@@ -21,7 +21,7 @@ class ContactsFragment : Fragment() {
     private val binding get() = _binding!!
 
     //created and adapter of ContactAdapter
-    private val adapter = ContactAdapter()
+    private val  adapter = ContactAdapter()
 
     //created an object of ContactViewModel
     private  lateinit var viewModel : ContactViewModel

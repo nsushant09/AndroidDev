@@ -2,12 +2,12 @@ package com.neupanesushant.learncharts
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.neupanesushant.learncharts.databinding.ActivityMainBinding
 import java.text.ParseException
@@ -17,7 +17,7 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
-    private var lineDataSet : LineDataSet? = null
+    private var lineDataSet : BarDataSet? = null
 
     private var startIndex = 0
 
@@ -48,7 +48,14 @@ class MainActivity : AppCompatActivity() {
 
         if(binding.lineChartView.data == null){
             val dayLabels : MutableList<String> = ArrayList()
-            val depositEntry : MutableList<Entry> = ArrayList()
+            val depositEntry : MutableList<BarEntry> = ArrayList()
+
+
+            val description = Description()
+            description.text = "Description"
+            description.textSize = 24f
+            description.setPosition(200f, 200f)
+            binding.lineChartView.description = description
 
             for(i in transactionAxisInfoList.indices){
                 try{
@@ -61,15 +68,15 @@ class MainActivity : AppCompatActivity() {
                 if (y > maximumYAxisValue) {
                     maximumYAxisValue = y
                 }
-                depositEntry.add(Entry(i.toFloat(), y))
+                depositEntry.add(BarEntry(i.toFloat(), y))
             }
-            val depositDataSet = LineDataSet(depositEntry, "Deposit Entry")
-            depositDataSet.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
-            depositDataSet.lineWidth = 2f
-            lineDataSet = depositDataSet.copy() as LineDataSet
-            val dataSets: MutableList<ILineDataSet> = java.util.ArrayList()
+            val depositDataSet = BarDataSet(depositEntry, "Deposit Entry")
+            //            depositDataSet.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
+//            depositDataSet.lineWidth = 2f
+            lineDataSet = depositDataSet.copy() as BarDataSet
+            val dataSets: MutableList<IBarDataSet> = java.util.ArrayList()
             dataSets.add(depositDataSet)
-            val lineData = LineData(dataSets)
+            val lineData = BarData(dataSets)
             //Animation
             binding.lineChartView.animateX(800)
             //Description Disabled
@@ -103,6 +110,7 @@ class MainActivity : AppCompatActivity() {
             xAxis.gridLineWidth = 1f
             xAxis.textSize = 8f
             xAxis.axisLineWidth = 1f
+
             val formatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
                     if (value > -1 && value < depositEntry.size) {
@@ -117,12 +125,14 @@ class MainActivity : AppCompatActivity() {
                     return ""
                 }
             }
+
             xAxis.valueFormatter = formatter
             xAxis.setLabelCount(5, true)
 
             // Set YAxis
             val yAxis = binding.lineChartView.axisLeft
             yAxis.gridColor = android.R.color.transparent
+            yAxis.axisLineColor = R.color.black
             yAxis.gridLineWidth = 1f
             yAxis.textSize = 8f
             yAxis.axisMinimum = 0f

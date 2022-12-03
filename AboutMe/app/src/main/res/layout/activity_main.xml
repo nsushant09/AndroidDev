@@ -54,6 +54,7 @@
         android:layout_marginTop="16dp"
         android:contentDescription="@string/yellow_star"
         app:srcCompat="@android:drawable/star_big_on" />
+
     <ScrollView
         android:id="@+id/bioScroll"
         android:layout_width="match_parent"
@@ -64,6 +65,7 @@
             android:layout_height="wrap_content"
             android:text="@string/bio"/>
     </ScrollView>
+
 </LinearLayout>
 
 </layout>
