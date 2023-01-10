@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/linear_radius_progress_bar.xml" value="0.2775" />
         <entry key="app/src/main/res/drawable/progressbarstyle1.xml" value="0.508" />
         <entry key="app/src/main/res/drawable/progressbarstyle2.xml" value="0.508" />
         <entry key="app/src/main/res/drawable/progressbarstyle3.xml" value="0.508" />
