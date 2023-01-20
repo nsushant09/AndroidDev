@@ -1,0 +1,46 @@
+1f.
+When a process needs to access a page in its virtual memory, the operating system (OS) must first locate the page in the page table maintained in the process control block (PCB). The process of accessing a page in the page table is typically done in multiple steps, known as page table walks.
+
+The number of memory accesses required to access a page in the page table will depend on the depth of the page table. In a traditional multi-level page table, the OS typically needs to access multiple levels of page tables before reaching the page.
+
+However, the OS uses techniques such as caching, prefetching and Translation Lookaside Buffer (TLB) to speed up the process. Caching allows the OS to quickly access recently accessed page table entries, prefetching allows the OS to anticipate page table accesses and fetch necessary page table entries before they are needed, and TLB is a small, fast memory that holds recent page-table translations and it can be used to speed up virtual memory accesses. These techniques help the OS to access pages in the page table more efficiently.
+
+1g.
+When a program is running on a computer and its memory space exceeds the available physical memory, the operating system will use a technique called “paging” to manage the program’s execution. The Os will move some of the program’s memory pages from RAM to a reserved area on the hard drive called the “swap space” or “page file” to free up physical memory for other programs to use.
+
+The OS will use a page replacement algorithm to determine which pages should be moved to the swap space. When the program needs to access the page that has been moved to the swap space the Os will bring the page back into RAM and update accordingly. The process of moving pages from RAM to the swap space and back is, called “page swapping” or “page paging”
+
+In the given scenario, the program is using GB of memory and the available RAM is GB which means that the program is using more memory that is available in the RAM . The OS will start moving some of the program’s memory pages from RAM to the swap space. The swap space size is GB which means that the OS has enough space to store the program’s memory pages 
+
+1h.
+The virtual address space refers to the memory space that is available to a program or process. It is a visual representation of the memory that is available to the program and is used to store data, instructions, and other information
+
+A virtual address space needs to be backed up by physical media to provide a physical location for the virtual memory so that when the program needs to access a specific memory location the OS translates the virtual address to a physical address and accesses the memory through physical medium
+
+If the virtual address space is not backed up by the physical media the program would not have access to any memory and would not be able to execute. Therefore, the virtual address space needs to be mapped to physical memory to allow the program to access and use the memory.
+
+
+2a.
+The operating system can use techniques such as time slicing, monitoring system resources and implementing a check in mechanism to detect and prevent processes from running indefinitely in an infinite loop. It can also take action like killing the process or sending an alert to the user. 
+
+If I were implementing the OS, I would use a combination of techniques to prevent processes in infinite loop from running indefinitely. I would implement time slicing to assign each process a fixed time slice or a fixed amount of time to execute before being preempted by the OS. I would also monitor the usage of system resources such as CPU, memory and I/O operations to detect if a process is consuming excessive resources for an extended period of time and take action accordingly.
+
+Additionally, I would implement a system call or a mechanism that allows a process to periodically check-in with the OS, reporting its progress and state. If the OS detects that a process has not checked in for a certain period of time, it can assume that the process is in an infinite loop and take action. This would help ensure that the system remains stable and responsive for all users.
+
+3a. 
+The size of the area created by mmap system call is 10 * size, which is 10 * 4096 = 40960 bytes. This can be seen in the line where mmap is called. 
+
+array = mmap(NULL, 10 * size, PROT_NONE, MAP_SHARED, fd, 0);
+
+The first parameter of mmap is the starting address of the memory to be mapped, which is set to NULL, meaning that the OS chooses the address.The second parameter is the size of the memory to be mapped which is 10  * size (40960 bytes).
+
+The remaining parameters are protection flags, the map sharing flags, the file descriptor and the offset in the file. In this case the memory is mapped as PROT_NONE, meaning that it cannot be accessed, and the map sharing flag is set to MAP_SHARED, meaning that is shared with other processes. The file descriptor refers to the file ‘file.txt’ and the offset is 0, meaning the mapping starts at the beginning of the file.
+
+3b. 
+The protection of the memory area after the mprotect system call is executed is PROT_READ. This can be seen in line where mprotect is called:
+
+mprotect(array, 8 * size, PROT_READ);
+
+The first parameter of mprotect is the starting address of the memory area to be protected, which is the address of the mapped memory returned by mmap call. The second parameter is the size of the memory area to be protected, which is 8 * size (8 * 4096 = 32768 bytes). The third parameter is the protection flags, in this case it is PROT_READ, meaning that the memory area can be read, but not written or executed.
+
+ 
