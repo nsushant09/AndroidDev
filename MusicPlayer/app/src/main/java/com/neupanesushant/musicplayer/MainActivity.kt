@@ -1,12 +1,14 @@
 package com.neupanesushant.musicplayer
 
 import android.app.Activity
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.ServiceConnection
 import android.media.AudioAttributes
 import android.media.MediaPlayer
-import android.os.Build
+import android.os.*
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
@@ -18,32 +20,67 @@ import java.lang.Exception
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
-    private lateinit var player : MediaPlayer
     private lateinit var handler : Handler
+    private lateinit var musicPlayerService: MusicPlayerService
+    private var mBound = false
+    private var newPosition = 0;
     private lateinit var runnable : Runnable
-    private var isPause = false
-    var playerDuration : Int = 0
-    var newPosition : Int = 0
+
+    private val musicServiceConnection = object : ServiceConnection{
+        override fun onServiceConnected(componentName : ComponentName?, service: IBinder?) {
+            val binder = service as MusicPlayerService.MyBinder
+            musicPlayerService = binder.getService()
+            mBound = true
+        }
+
+        override fun onServiceDisconnected(componentName: ComponentName?) {
+            mBound = false
+        }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val intentBind = Intent(this, MusicPlayerService::class.java)
+        bindService(intentBind, musicServiceConnection, Context.BIND_AUTO_CREATE)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.btnPlay.setOnClickListener{
-//            onPlayClick()
-            playFromLink("https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/62/38/72/623872c3-76b7-39e4-22d2-f2a9c41e5d34/mzaf_5795569473118457876.plus.aac.p.m4a")
-        }
-        binding.btnResume.setOnClickListener{
-            onResumeClick()
-        }
-        binding.btnPause.setOnClickListener{
-            onPauseClick()
-        }
-        binding.btnStop.setOnClickListener{
-            onStopClick()
-        }
-        handler = Handler()
 
+        binding.btnPlay.setOnClickListener {
+            if (mBound) {
+                musicPlayerService.onPlayClick()
+                binding.seekBar.max = musicPlayerService.getPlayer().duration
+                handler.postDelayed(runnable,1000)
+            }
+        }
+        binding.btnResume.setOnClickListener {
+            if (mBound) {
+                musicPlayerService.onResumeClick()
+                handler.postDelayed(runnable,1000)
+            }
+        }
+        binding.btnPause.setOnClickListener {
+            if (mBound) {
+                musicPlayerService.onPauseClick()
+                handler.removeCallbacks(runnable)
+            }
+        }
+        binding.btnStop.setOnClickListener {
+            if (mBound) {
+                musicPlayerService.onStopClick()
+                handler.removeCallbacks(runnable)
+            }
+        }
+
+        binding.btnNextActivity.setOnClickListener {
+            Intent(this, TestActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
 
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
@@ -56,87 +93,19 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onStopTrackingTouch(p0: SeekBar?) {
-                player.seekTo(newPosition)
+                musicPlayerService.changePlayerPosition(newPosition)
             }
         })
 
+        handler = Handler(Looper.getMainLooper())
         runnable = object : Runnable {
             override fun run() {
-                if(player.isPlaying){
-                    binding.seekBar.progress = player.currentPosition
-                    handler.postDelayed(this, 0)
+                if(musicPlayerService.isPlayerPlaying()){
+                    binding.seekBar.progress = musicPlayerService.getPlayerPosition()
+                    handler.postDelayed(this, 100)
                 }
             }
-
-        }
-
-
-    }
-
-    fun onPlayClick(){
-
-        player = MediaPlayer.create(this, R.raw.nationalanthem)
-        player.setOnCompletionListener {
-            stopplayer()
-        }
-        playerDuration = player.duration
-        binding.seekBar.max = playerDuration
-        isPause = false
-        player.start()
-        handler.postDelayed(runnable, 1000)
-
-
-    }
-
-    fun onResumeClick(){
-        handler.postDelayed(runnable, 1000)
-        player.start()
-    }
-
-    fun playFromLink(linkstring : String){
-        player = MediaPlayer()
-        player.setAudioAttributes(
-            AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                .setUsage(AudioAttributes.USAGE_MEDIA)
-                .build()
-        )
-        try{
-                player.setDataSource(linkstring)
-                player.prepare()
-                player.start()
-
-        }catch (e : Exception){
-            Toast.makeText(this, "Error while loading url", Toast.LENGTH_SHORT).show()
-        }
-        binding.seekBar.max = player.duration
-        isPause = false
-        handler.postDelayed(runnable, 1000)
-
-    }
-
-    fun onPauseClick(){
-        if(player.isPlaying){
-            player.pause()
-            handler.removeCallbacks(runnable)
-            isPause = true
         }
     }
 
-    fun onStopClick(){
-        stopplayer()
-    }
-
-    fun stopplayer(){
-        if(player.isPlaying || isPause){
-            player.release()
-            Toast.makeText(this, "MediaPlayer released", Toast.LENGTH_SHORT).show()
-            isPause = false
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        stopplayer()
-    }
 }
