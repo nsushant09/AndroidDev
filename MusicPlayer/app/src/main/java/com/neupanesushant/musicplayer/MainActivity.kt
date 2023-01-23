@@ -76,12 +76,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnNextActivity.setOnClickListener {
-            Intent(this, TestActivity::class.java).apply {
-                startActivity(this)
-            }
-        }
-
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 binding.tvShowProgress.text = p1.toString()

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MusicPlayer</string>
+    <string name="label_play">Play</string>
+    <string name="label_resume">Resume</string>
+    <string name="label_pause">Pause</string>
+    <string name="label_stop">Stop</string>
 </resources>
