@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Biometrics</string>
+    <string name="login">Login</string>
+    <string name="you_are_logged_in">You Are Logged In</string>
+</resources>
