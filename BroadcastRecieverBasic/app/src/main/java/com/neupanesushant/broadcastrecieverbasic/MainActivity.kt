@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // To recieve intent
+        // To recieve intent from another application
         val intent = intent
         val action = intent.action
         val type = intent.type
@@ -31,6 +31,10 @@ class MainActivity : AppCompatActivity() {
                 binding.recievedImageTv.setImageURI(intent.getParcelableExtra(Intent.EXTRA_STREAM))
             }
         }
+
+
+
+
     }
 }
 

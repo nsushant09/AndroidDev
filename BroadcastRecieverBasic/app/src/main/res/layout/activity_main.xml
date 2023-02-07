@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Random Text"
         android:textColor="@color/teal_200"
+        android:elevation="16dp"
         />
 
     <ImageView
@@ -30,6 +31,8 @@
         android:layout_marginTop="16dp"
         android:contentDescription="@string/image_received"
         tools:src="@mipmap/ic_launcher"
+        android:background="#FF5722"
+        android:elevation="4dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
