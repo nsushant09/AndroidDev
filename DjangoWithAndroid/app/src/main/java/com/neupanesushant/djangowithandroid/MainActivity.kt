@@ -8,6 +8,8 @@ import androidx.lifecycle.lifecycleScope
 import com.neupanesushant.djangowithandroid.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val endpoints: Endpoints by inject()
+    private val endpointHelper: EndpointHelper by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        performRequest()
+
     }
 
     private fun setupEventListener() {
@@ -66,28 +69,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObserver() {
-    }
 
-    private fun performRequest() {
-        CoroutineScope(Dispatchers.Default).launch {
-            try {
-                val list = fetchData()
-                print(list)
-            } catch (e: java.lang.Exception) {
-                e.printStackTrace()
+        CoroutineScope(Dispatchers.IO).launch {
+            endpointHelper.getAllCompanies().collectLatest {
+                Log.i("FLOW", "$it")
             }
         }
+
     }
 
     private suspend fun delete(id: Int) {
         val response = endpoints.deleteEmployee(id)
-        if(response.isSuccessful){
+        if (response.isSuccessful) {
             Toast.makeText(this@MainActivity, "Employee delete", Toast.LENGTH_SHORT).show()
             binding.etDeleteEmployee.setText("")
         }
-    }
-
-    private suspend fun fetchData(): List<Company> {
-        return endpoints.getAllCompanies()
     }
 }

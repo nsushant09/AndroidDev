@@ -16,4 +16,8 @@ val appModule = module {
     single<Endpoints> {
         get<Retrofit>().create(Endpoints::class.java)
     }
+
+    single {
+        EndpointHelper(get())
+    }
 }
