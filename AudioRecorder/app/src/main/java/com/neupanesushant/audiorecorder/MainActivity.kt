@@ -3,6 +3,7 @@ package com.neupanesushant.audiorecorder
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import androidx.core.app.ActivityCompat
 import com.neupanesushant.audiorecorder.databinding.ActivityMainBinding
@@ -47,14 +48,29 @@ class MainActivity : AppCompatActivity() {
         binding.btnRecordStart.setOnTouchListener { view, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    val audioFileName = System.currentTimeMillis().toString() + ".mp3"
-                    File(cacheDir, audioFileName).also {
-                        audioRecorder.start(it)
-                        audioFile = it
-                    }
+                    Log.i(
+                        "RECORDER",
+                        "ACTION_DOWN ON BUTTON"
+                    )
+//                    val audioFileName = System.currentTimeMillis().toString() + ".mp3"
+//                    File(cacheDir, audioFileName).also {
+//                        audioRecorder.start(it)
+//                        audioFile = it
+//                    }
                 }
                 MotionEvent.ACTION_UP -> {
-                    audioRecorder.stop()
+                    Log.i(
+                        "RECORDER",
+                        "ACTION_UP ON BUTTON"
+                    )
+//                    audioRecorder.stop()
+                }
+                MotionEvent.ACTION_CANCEL -> {
+                    Log.i(
+                        "RECORDER",
+                        "ACTION_CANCLE ON BUTTON"
+                    )
+//                    audioRecorder.stop()
                 }
             }
             false
