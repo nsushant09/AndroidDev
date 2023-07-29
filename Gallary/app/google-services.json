@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "323053996339",
+    "project_id": "gallary-image-retriever",
+    "storage_bucket": "gallary-image-retriever.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323053996339:android:4a0affad09840dbdb8d646",
+        "android_client_info": {
+          "package_name": "com.neupanesushant.imageretriever"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "323053996339-navl3ehv0n71g18nmghr8psvpbpgvtm5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neupanesushant.imageretriever",
+            "certificate_hash": "a6cde985ea987feea6fbd3bd9595396f01d0c78f"
+          }
+        },
+        {
+          "client_id": "323053996339-47fe4go8hlg19qkpl5cgg1n597nllrrr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPavWfI4KoCx1JhjIAV-u-V0sRzA9y60c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "323053996339-47fe4go8hlg19qkpl5cgg1n597nllrrr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

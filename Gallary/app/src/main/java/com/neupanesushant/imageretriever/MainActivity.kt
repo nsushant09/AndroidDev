@@ -1,83 +1,105 @@
 package com.neupanesushant.imageretriever
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import androidx.annotation.RequiresApi
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.neupanesushant.imageretriever.databinding.ActivityMainBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.neupanesushant.imageretriever.domain.usecase.ImagePersistenceWorker
+import com.neupanesushant.imageretriever.domain.usecase.ImageRetrievalWorker
+import com.neupanesushant.imageretriever.domain.utils.PermissionManager
+import com.neupanesushant.imageretriever.view.ImageAdapter
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val mediaImagePermission = 112233;
-    private val externalStoragePermission = 123;
-
+    private val IMAGE_RETRIEVAL_AND_SAVE = "ImageRetrievalAndSave"
     private val workManager = WorkManager.getInstance(this)
     private val imageRetrievalRequest = OneTimeWorkRequestBuilder<ImageRetrievalWorker>()
         .build()
+    private val imagePersistenceRequest = OneTimeWorkRequestBuilder<ImagePersistenceWorker>()
+        .build()
+
+    private var imageUri: ArrayList<Uri>? = null
 
 
+    @SuppressLint("HardwareIds")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupView()
+        setupEventListener()
+        setupObserver()
+        requestPermissionForImageRetrieval()
+    }
 
-        binding.retrieveImage.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                if (hasMediaImagePermission()) {
-                    retrieveImage()
-                } else {
-                    requestMediaImagePermission()
-                }
-            } else {
-                if (hasExternalStoragePermission()) {
-                    retrieveImage()
-                } else {
-                    requestExternalStoragePermission()
-                }
-            }
-        }
+    private fun setupView() {
+        binding.rvImages.layoutManager = GridLayoutManager(this, 2)
+    }
 
+    private fun setupEventListener() {
 
     }
 
-    var imageUri: List<Uri>? = null
+    private fun setupObserver() {
+    }
+
+    private fun requestPermissionForImageRetrieval() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (PermissionManager.hasMediaImagePermission(this)) {
+                retrieveImage()
+            } else {
+                PermissionManager.requestMediaImagePermission(this)
+            }
+        } else {
+            if (PermissionManager.hasExternalStoragePermission(this)) {
+                retrieveImage()
+            } else {
+                PermissionManager.requestExternalStoragePermission(this)
+            }
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private fun retrieveImage() {
-        Log.i("TAG", "Permission Granted");
 
-        workManager.enqueue(imageRetrievalRequest)
-        workManager.getWorkInfoByIdLiveData(imageRetrievalRequest.id).observe(this){workInfo ->
-            if(workInfo?.state == WorkInfo.State.SUCCEEDED) {
-                binding.retrieveImage.text = "Completed"
+        workManager.beginUniqueWork(
+            IMAGE_RETRIEVAL_AND_SAVE,
+            ExistingWorkPolicy.REPLACE,
+            imageRetrievalRequest
+        ).then(
+            imagePersistenceRequest
+        ).enqueue()
+
+        workManager.getWorkInfoByIdLiveData(imageRetrievalRequest.id).observe(this) { workInfo ->
+            if (workInfo?.state == WorkInfo.State.SUCCEEDED) {
                 imageUri = ImageRetrievalWorker.imageUri
+                binding.progressBar.isVisible = false
                 setImage()
-            }else{
-                binding.retrieveImage.text = "Retrieving..."
+            } else {
+                binding.progressBar.isVisible = true
             }
         }
     }
 
-    fun setImage() {
+    private fun setImage() {
         imageUri?.let {
-            if (imageUri!!.size > 0) {
-                binding.displayImage.setImageURI(imageUri!!.get(0))
+            val adapter = ImageAdapter(this, it) {
+                Toast.makeText(this, "This feature will be added soon", Toast.LENGTH_SHORT).show()
             }
+            binding.rvImages.adapter = adapter
         }
     }
 
@@ -88,48 +110,15 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        if (requestCode == externalStoragePermission && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
+        if (requestCode == PermissionManager.EXTERNAL_STORAGE_CODE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
         ) {
             retrieveImage()
         }
 
-        if (requestCode == mediaImagePermission && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == PermissionManager.EXTERNAL_STORAGE_CODE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             retrieveImage()
         }
 
-    }
-
-
-    private fun requestExternalStoragePermission() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-            externalStoragePermission
-        );
-    }
-
-    private fun hasExternalStoragePermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun requestMediaImagePermission() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
-            mediaImagePermission
-        );
-    }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun hasMediaImagePermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.READ_MEDIA_IMAGES
-        ) == PackageManager.PERMISSION_GRANTED
     }
 
 }

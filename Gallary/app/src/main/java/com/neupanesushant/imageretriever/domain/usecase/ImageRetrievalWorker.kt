@@ -1,4 +1,4 @@
-package com.neupanesushant.imageretriever
+package com.neupanesushant.imageretriever.domain.usecase
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Environment
 import androidx.core.content.FileProvider
 import androidx.work.CoroutineWorker
+import androidx.work.Data
 import androidx.work.WorkerParameters
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -15,7 +16,7 @@ import java.util.Locale
 class ImageRetrievalWorker(appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params) {
     companion object {
-        val imageUri = mutableListOf<Uri>()
+        val imageUri = arrayListOf<Uri>()
     }
 
     @SuppressLint("RestrictedApi")
