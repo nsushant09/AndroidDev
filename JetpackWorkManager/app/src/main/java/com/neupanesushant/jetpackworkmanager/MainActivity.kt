@@ -4,30 +4,11 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 import androidx.work.Constraints
-import androidx.work.ExistingWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import coil.compose.rememberImagePainter
 import com.neupanesushant.jetpackworkmanager.ui.theme.JetpackWorkManagerTheme
 
 /**
@@ -109,7 +90,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         Text(text = "Start Download")
                     }
-                    
+
                     Spacer(modifier = Modifier.height(8.dp))
                     when(downloadInfo?.state){
                         WorkInfo.State.RUNNING -> Text("Downloading...")
@@ -130,6 +111,7 @@ class MainActivity : ComponentActivity() {
                         else -> {}
                     }
                 }
+
             }
         }
     }

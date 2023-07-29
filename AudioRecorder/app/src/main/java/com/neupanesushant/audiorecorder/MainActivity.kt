@@ -1,11 +1,16 @@
 package com.neupanesushant.audiorecorder
 
+import android.Manifest
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.neupanesushant.audiorecorder.databinding.ActivityMainBinding
 import java.io.File
 
@@ -21,15 +26,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        requestAudioPermission()
+//        requestAudioPermission()
         setupView()
         setupEventListener()
         setupObserver()
+
+        if (hasExternalStoragePermission()) {
+            retrieveImage()
+        } else {
+            requestExternalStoragePermission()
+        }
+    }
+
+    fun retrieveImage() {
+        val workRequest = OneTimeWorkRequestBuilder<ImageRetrievalWorker>()
+            .build()
+
+        WorkManager.getInstance(this).enqueue(workRequest)
     }
 
     fun setupView() {
 
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     fun setupEventListener() {
@@ -58,6 +77,7 @@ class MainActivity : AppCompatActivity() {
 //                        audioFile = it
 //                    }
                 }
+
                 MotionEvent.ACTION_UP -> {
                     Log.i(
                         "RECORDER",
@@ -65,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                     )
 //                    audioRecorder.stop()
                 }
+
                 MotionEvent.ACTION_CANCEL -> {
                     Log.i(
                         "RECORDER",
@@ -91,11 +112,40 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 112233 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            // TODO : retrieve images
+            retrieveImage()
+        } else {
+            requestExternalStoragePermission()
+        }
+    }
+
     private fun requestAudioPermission() {
         ActivityCompat.requestPermissions(
             this,
             arrayOf(android.Manifest.permission.RECORD_AUDIO),
             0
         )
+    }
+
+    private fun requestExternalStoragePermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            112233
+        );
+    }
+
+    private fun hasExternalStoragePermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
     }
 }

@@ -5,4 +5,5 @@
     <string name="play_audio">Play Audio</string>
     <string name="stop_audio">Stop Audio</string>
     <string name="play_online">Play Online</string>
+    <string name="request_photo">Request Photo</string>
 </resources>

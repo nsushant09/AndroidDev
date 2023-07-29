@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Gallary</string>
+    <string name="retrieve_image">Retrieve Image</string>
+</resources>

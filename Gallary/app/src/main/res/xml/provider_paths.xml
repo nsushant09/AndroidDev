@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <external-path name="dcim_path" path="/storage/emulated/0/DCIM/" />
+    <external-path name="external_files" path="."/>
+    <external-files-path name="external_files_path" path="." />
+    <root-path name="root" path="." />`
+</paths>
+
+
+    <!--<files-path/> -> Context.getFilesDir()-->
+    <!--<cache-path/> -> Context.getCacheDir()-->
+    <!--<external-path/> -> Environment.getExternalStorageDirectory()-->
+    <!--<external-files-path/> -> Context.getExternalFilesDir(String)-->
+    <!--<external-cache-path/> -> Context.getExternalCacheDir()-->
+    <!--<external-media-path/> -> Context.getExternalMediaDirs()-->
