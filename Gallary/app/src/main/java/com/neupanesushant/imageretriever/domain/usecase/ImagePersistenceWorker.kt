@@ -17,7 +17,7 @@ class ImagePersistenceWorker(
 ) : CoroutineWorker(context, workerParameters) {
 
     private lateinit var imageUri: ArrayList<Uri>
-    private val CHUNK_SIZE = 8
+    private val CHUNK_SIZE = 2
     override suspend fun doWork(): Result {
         imageUri = ImageRetrievalWorker.imageUri
 
