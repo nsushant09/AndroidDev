@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.work.Constraints
 import androidx.work.ExistingWorkPolicy
+import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
@@ -28,6 +30,11 @@ class MainActivity : AppCompatActivity() {
     private val imageRetrievalRequest = OneTimeWorkRequestBuilder<ImageRetrievalWorker>()
         .build()
     private val imagePersistenceRequest = OneTimeWorkRequestBuilder<ImagePersistenceWorker>()
+        .setConstraints(
+            Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build()
+        )
         .build()
 
     private var imageUri: ArrayList<Uri>? = null

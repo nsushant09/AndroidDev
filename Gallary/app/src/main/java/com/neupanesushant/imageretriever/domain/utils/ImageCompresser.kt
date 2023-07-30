@@ -13,7 +13,7 @@ import java.io.FileOutputStream
 
 object ImageCompresser {
     suspend fun compressImage(context: Context, inputUri: Uri): Uri? {
-        return withContext(Dispatchers.IO) {
+        return withContext(Dispatchers.Default) {
             val a = async {
                 val desiredSizeKB = 200
                 var quality = 85 // Initial compression quality (can be adjusted)
