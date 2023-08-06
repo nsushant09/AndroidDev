@@ -8,41 +8,141 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/home_appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        >
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
+            android:animateLayoutChanges="true"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title="Title"
-            android:id="@+id/collapsingToolbar"
-            >
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:titleEnabled="true">
 
-            <ImageView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:src="@mipmap/ic_launcher"
-                android:scaleType="centerCrop"
-                android:layout_gravity="center|end"
-                android:layout_marginEnd="32dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:id="@+id/hamburger_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/ic_launcher_round"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Download Free wallpapers"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textSize="48sp"
                 />
+
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbar_home"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                />
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="3dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/ic_launcher_background"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_launcher_background" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:hint="Search"
+                        android:textColor="@color/black"
+                        android:padding="8dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_launcher_background" />
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <!--    <com.google.android.material.appbar.AppBarLayout-->
+    <!--        android:id="@+id/appbar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="300dp"-->
+    <!--        android:fitsSystemWindows="true"-->
+    <!--        >-->
+
+    <!--        <com.google.android.material.appbar.CollapsingToolbarLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:fitsSystemWindows="true"-->
+    <!--            app:contentScrim="?attr/colorPrimary"-->
+    <!--            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"-->
+    <!--            app:title="Title"-->
+    <!--            android:id="@+id/collapsingToolbar"-->
+    <!--            >-->
+
+    <!--            <ImageView-->
+    <!--                android:layout_width="200dp"-->
+    <!--                android:layout_height="200dp"-->
+    <!--                android:src="@mipmap/ic_launcher"-->
+    <!--                android:scaleType="centerCrop"-->
+    <!--                android:layout_gravity="center|end"-->
+    <!--                android:layout_marginEnd="32dp"-->
+    <!--                />-->
+
+    <!--            <androidx.appcompat.widget.Toolbar-->
+    <!--                android:id="@+id/toolbar"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="?attr/actionBarSize"-->
+    <!--                app:layout_collapseMode="pin"-->
+    <!--                />-->
+
+    <!--        </com.google.android.material.appbar.CollapsingToolbarLayout>-->
+
+    <!--    </com.google.android.material.appbar.AppBarLayout>-->
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -56,17 +156,5 @@
 
 
     </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:baselineAlignBottom="false"
-        android:clickable="true"
-        android:src="@mipmap/ic_launcher_round"
-        app:fabSize="normal"
-        app:layout_anchor="@id/appbar"
-        app:layout_anchorGravity="end|bottom"
-        android:layout_marginEnd="32dp"
-        />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
