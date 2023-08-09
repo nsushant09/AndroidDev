@@ -36,6 +36,17 @@
                     tools:ignore="BatteryLife" />
             </intent-filter>
         </receiver>
+
+        <receiver
+            android:name=".OrderedStaticBroadcastReceiver"
+            android:exported="true"
+            >
+            <intent-filter
+                android:priority="2"
+                >
+                <action android:name="com.neupanesushant.com.neupanesushant.staticbroadcastreciever.CUSTOM_ACTION" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

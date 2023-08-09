@@ -1,5 +1,6 @@
 package com.neupanesushant.staticbroadcastreciever
 
+import android.annotation.SuppressLint
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
@@ -10,20 +11,27 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private val dynamicBroadcastReciever = DynamicBroadcastReciever();
-    private val customBroadcastReciever = CustomBroadcastReciever();
+//    private val dynamicBroadcastReciever = DynamicBroadcastReciever();
+//    private val customBroadcastReciever = CustomBroadcastReciever();
+
+    val orderedDynamicBroadcastReceiver = OrderedDynamicBroadcastReceiver()
 
     private lateinit var tv: TextView
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         tv = findViewById(R.id.tv)
 
         //        Custom BroadCast Reciever
-        val filter = IntentFilter(BroadcastManager.CUSTOM_ACTION)
-        registerReceiver(customBroadcastReciever, filter)
+//        val filter = IntentFilter(BroadcastManager.CUSTOM_ACTION)
+//        registerReceiver(customBroadcastReciever, filter)
 
+//        Ordered Dynamic
+        val filter = IntentFilter(BroadcastManager.CUSTOM_ACTION);
+        filter.priority = 1
+        registerReceiver(orderedDynamicBroadcastReceiver, filter)
 
     }
 
@@ -33,34 +41,35 @@ class MainActivity : AppCompatActivity() {
         val filter = IntentFilter()
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
         filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION)
-        registerReceiver(dynamicBroadcastReciever, filter)
-
-        dynamicBroadcastReciever.onConnectivityChange = { isConnected ->
-            if (isConnected) {
-                tv.text = "Network Connected"
-            } else {
-                tv.text = "Network Not Connected"
-            }
-        }
-
-        dynamicBroadcastReciever.onWifiChange = { isConnected ->
-            if (isConnected) {
-                tv.text = "WIFI Connected"
-            } else {
-                tv.text = "WIFI Disconnected"
-            }
-        }
+//        registerReceiver(dynamicBroadcastReciever, filter)
+//
+//        dynamicBroadcastReciever.onConnectivityChange = { isConnected ->
+//            if (isConnected) {
+//                tv.text = "Network Connected"
+//            } else {
+//                tv.text = "Network Not Connected"
+//            }
+//        }
+//
+//        dynamicBroadcastReciever.onWifiChange = { isConnected ->
+//            if (isConnected) {
+//                tv.text = "WIFI Connected"
+//            } else {
+//                tv.text = "WIFI Disconnected"
+//            }
+//        }
 
     }
 
     override fun onStop() {
         super.onStop()
-        unregisterReceiver(dynamicBroadcastReciever)
+//        unregisterReceiver(dynamicBroadcastReciever)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(customBroadcastReciever)
+//        unregisterReceiver(customBroadcastReciever)
+        unregisterReceiver(orderedDynamicBroadcastReceiver)
     }
 
 }
@@ -97,7 +106,7 @@ class MainActivity : AppCompatActivity() {
  *
  * Another method
  * Intent intent = new Intent(action)
- * intent.setPackage("recieverapppackage")
+ * intent.setPackage("recieverapppackage") : This is the only way to send events to static receivers since android oreo
  * sendBroadcast(intent)
  * In the reciever app add intent filter for the action in broadcast reciever
  *
@@ -110,5 +119,31 @@ class MainActivity : AppCompatActivity() {
  *      intent.setComponent(cn);
  *      sendBroadcast(intent);
  *  }
+ *
+ *
+ *  Ordered Broadcast
+ *  Example use case :
+ *
+ *  You app sends a broadcast in reaction to a event
+ *  and you want to update user interface if app is in foreground
+ *  If the app is in background you want to show the notification
+ *  registerReciever() in onstart to update ui dynamically
+ *  another reciever in manifest to post notification in
+ *
+ *  The you send first to dynamic and if there it is reached then abort the next
+ *  Otherwise it recieves and display the notification
+ *
+ *  To send ordered broadcast
+ *
+ *  From send app :
+ *  Intent intent = new Intent("apppackage.ACTION")
+ *  sendOrderedbroadcast(intent, null);
+ *  For this you have to give priority in your reciever application
+ *  For static : set in Intent Filter tag : priority = ""
+ *  For dynamic in IntentFilter itself as filter.priority = ..
+ *
+ * Permission in Broadcast :
+ * 
+ *
  *
  */
