@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LearnTesting</string>
+    <string name="this_is_a_test_string">This is a test string</string>
 </resources>
