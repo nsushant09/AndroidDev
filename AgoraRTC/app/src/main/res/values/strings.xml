@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AgoraRTC</string>
+    <string name="leave">Leave</string>
+    <string name="join">Join</string>
 </resources>

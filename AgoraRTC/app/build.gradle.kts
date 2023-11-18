@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
-
 android {
     namespace = "com.neupanesushant.agorartc"
     compileSdk = 33
@@ -48,5 +47,5 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation("io.agora.rtc:io.agora.rtc:full-sdk:4.0.1")
+    implementation("io.agora.rtc:full-sdk:4.0.1")
 }
