@@ -16,8 +16,8 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     @get:LayoutRes
     protected abstract val layoutId: Int
 
-    protected val context get() = requireContext()
-    protected val activity get() = requireActivity()
+//    protected val context get() = requireContext()
+//    protected val activity get() = requireActivity()
 
     override fun onCreateView(
         inflater: LayoutInflater,
