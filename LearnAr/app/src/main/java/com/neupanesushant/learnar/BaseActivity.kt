@@ -18,14 +18,17 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, layoutId)
     }
 
-    private fun setup(){
+    private fun setup() {
         setupViews()
         setupEventListener()
         setupObserver()
+        setupExtras()
     }
+
     abstract fun setupViews();
     abstract fun setupEventListener();
     abstract fun setupObserver();
 
+    protected open fun setupExtras() {}
 
 }
