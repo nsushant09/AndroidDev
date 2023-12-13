@@ -15,12 +15,14 @@ import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.TransformableNode
 import com.neupanesushant.learnar.Utils.show
 import com.neupanesushant.learnar.databinding.ActivityMainBinding
+import java.util.concurrent.atomic.AtomicBoolean
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private var session: Session? = null
     private lateinit var fragment: ArFragment
+    private val isSetModel = AtomicBoolean(false)
     override val layoutId: Int
         get() = R.layout.activity_main
 
@@ -38,7 +40,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         fragment.setOnTapArPlaneListener { hitResult, plane, motionEvent ->
             val anchor = hitResult.createAnchor()
             buildModel { renderable ->
-                addModelToScene(anchor, renderable)
+                if (isSetModel.getAndSet(true)) {
+                    addModelToScene(anchor, renderable)
+                }
             }
         }
     }
@@ -75,7 +79,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     private fun buildModel(onModelBuilt: (ModelRenderable) -> Unit) {
-        val uri = getRawUri("sofa")
+        val uri = getRawUri("wooden_sofa")
         ModelRenderable.builder()
             .setSource(
                 this, RenderableSource.builder().setSource(
@@ -83,8 +87,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     uri,
                     RenderableSource.SourceType.GLB
                 )
-                    .setScale(0.75f)  // Scale the original model to 75%
-                    .setRecenterMode(RenderableSource.RecenterMode.ROOT)
+                    .setScale(0.50f)
                     .build()
             )
             .setRegistryId(uri.toString())
