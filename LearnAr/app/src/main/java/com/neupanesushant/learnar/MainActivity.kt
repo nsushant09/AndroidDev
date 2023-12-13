@@ -1,12 +1,18 @@
 package com.neupanesushant.learnar
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.net.Uri
 import android.util.Log
+import com.google.ar.core.Anchor
 import com.google.ar.core.ArCoreApk
 import com.google.ar.core.Config
 import com.google.ar.core.Session
+import com.google.ar.sceneform.AnchorNode
+import com.google.ar.sceneform.assets.RenderableSource
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
+import com.google.ar.sceneform.ux.TransformableNode
 import com.neupanesushant.learnar.Utils.show
 import com.neupanesushant.learnar.databinding.ActivityMainBinding
 
@@ -27,29 +33,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
-    private fun buildModel() {
-
-        ModelRenderable.builder()
-            .setSource(
-                this,
-                R.raw.sofa
-            )
-            .build()
-            .thenAccept {
-                Log.d(this.javaClass.name, "Model Loaded")
-
-            }
-            .exceptionally {
-                Log.d("MODEL", it.message.toString())
-                Log.d(this.javaClass.name, "Model not loaded")
-                null
-            }
-    }
 
     override fun setupEventListener() {
         fragment.setOnTapArPlaneListener { hitResult, plane, motionEvent ->
-            Log.d("TAG", "Tapped Ar Plane");
+            val anchor = hitResult.createAnchor()
+            buildModel { renderable ->
+                addModelToScene(anchor, renderable)
+            }
         }
+    }
+
+    private fun addModelToScene(anchor: Anchor, renderable: ModelRenderable) {
+        val node = AnchorNode(anchor)
+        val transformableNode = TransformableNode(fragment.transformationSystem)
+        transformableNode.setParent(node)
+        transformableNode.renderable = renderable
+        fragment.arSceneView.scene.addChild(node)
+        transformableNode.select()
     }
 
     override fun setupObserver() {
@@ -72,8 +72,42 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         session = Session(this)
         val config = Config(session)
         session!!.configure(config)
-//        buildModel()
     }
+
+    private fun buildModel(onModelBuilt: (ModelRenderable) -> Unit) {
+        val uri = getRawUri("sofa")
+        ModelRenderable.builder()
+            .setSource(
+                this, RenderableSource.builder().setSource(
+                    this,
+                    uri,
+                    RenderableSource.SourceType.GLB
+                )
+                    .setScale(0.75f)  // Scale the original model to 75%
+                    .setRecenterMode(RenderableSource.RecenterMode.ROOT)
+                    .build()
+            )
+            .setRegistryId(uri.toString())
+            .build()
+            .thenAccept {
+                Log.d("MODEL", "Model Loaded")
+                onModelBuilt(it)
+            }
+            .exceptionally {
+                Log.e("MODEL", "Exception loading model: $it")
+                AlertDialog.Builder(this)
+                    .setMessage("Could not load model")
+                    .show()
+                null
+            }
+    }
+
+    private fun getRawUri(fileName: String): Uri = Uri.Builder()
+        .scheme("android.resource")
+        .authority(packageName)
+        .appendPath("raw")
+        .appendPath(fileName)
+        .build()
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
