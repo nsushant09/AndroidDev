@@ -1,7 +1,7 @@
 package com.neupanesushant.learnar
 
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -32,4 +32,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     protected open fun setupExtras() {}
 
+    protected fun isPermissionGranted(grantResults: IntArray): Boolean {
+        return grantResults.isNotEmpty() &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED
+    }
 }

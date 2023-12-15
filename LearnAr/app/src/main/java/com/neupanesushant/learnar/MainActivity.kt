@@ -1,8 +1,8 @@
 package com.neupanesushant.learnar
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.net.Uri
 import android.util.Log
 import com.google.ar.core.Anchor
 import com.google.ar.core.ArCoreApk
@@ -13,7 +13,7 @@ import com.google.ar.sceneform.assets.RenderableSource
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.TransformableNode
-import com.neupanesushant.learnar.Utils.show
+import com.neupanesushant.learnar.UriRetriever.getRawUri
 import com.neupanesushant.learnar.databinding.ActivityMainBinding
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -23,20 +23,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private var session: Session? = null
     private lateinit var fragment: ArFragment
     private val isSetModel = AtomicBoolean(false)
+    private val permissionHandler = PermissionHandler(this)
     override val layoutId: Int
         get() = R.layout.activity_main
 
     @SuppressLint("CommitTransaction")
     override fun setupViews() {
-        try {
-            fragment = supportFragmentManager.findFragmentById(R.id.arFragment) as ArFragment
-        } catch (e: Exception) {
-            Log.d("TAG", "error")
-        }
+        permissionHandler.requestPermission(Manifest.permission.CAMERA)
     }
 
-
     override fun setupEventListener() {
+    }
+
+    private fun setupArFragment() {
+        fragment = supportFragmentManager.findFragmentById(R.id.arFragment) as ArFragment
+//        fragment.planeDiscoveryController.hide()
+        fragment.planeDiscoveryController.setInstructionView(null)
         fragment.setOnTapArPlaneListener { hitResult, plane, motionEvent ->
             val anchor = hitResult.createAnchor()
             buildModel { renderable ->
@@ -79,7 +81,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     private fun buildModel(onModelBuilt: (ModelRenderable) -> Unit) {
-        val uri = getRawUri("wooden_sofa")
+        val uri = this.getRawUri("wooden_sofa")
         ModelRenderable.builder()
             .setSource(
                 this, RenderableSource.builder().setSource(
@@ -105,31 +107,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
     }
 
-    private fun getRawUri(fileName: String): Uri = Uri.Builder()
-        .scheme("android.resource")
-        .authority(packageName)
-        .appendPath("raw")
-        .appendPath(fileName)
-        .build()
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (!PermissionManager.hasCameraPermission(this)) {
-            this.show("Camera permission is needed to run this application");
-            finish()
-        }
-    }
 
-    override fun onResume() {
-        super.onResume()
-        if (!PermissionManager.hasCameraPermission(this)) {
-            PermissionManager.requestCameraPermission(this)
+        when (requestCode) {
+            // On Camera Permission Granted
+            permissionHandler.getPermissionCode(Manifest.permission.CAMERA) -> {
+                if (isPermissionGranted(grantResults)) {
+                    checkArCoreAvailability()
+                    setupArFragment()
+                }
+            }
         }
-        checkArCoreAvailability()
+
     }
 
     override fun onDestroy() {
