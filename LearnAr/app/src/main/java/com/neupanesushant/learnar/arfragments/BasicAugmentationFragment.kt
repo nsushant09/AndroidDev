@@ -34,13 +34,12 @@ class BasicAugmentationFragment : ArFragment() {
 
     private fun setupFragment() {
         this.planeDiscoveryController.hide()
-        this.planeDiscoveryController.setInstructionView(null)
         this.setOnTapArPlaneListener { hitResult, _, _ ->
             if (isModelSet) return@setOnTapArPlaneListener
 
             val anchor = hitResult.createAnchor()
             modelManager.buildModel("scene") {
-                modelManager.addModelToScene(this, anchor, it)
+                modelManager.addTransformableNodeModel(this, anchor, it)
             }
             requireContext().show("Displaying Object")
             isModelSet = true

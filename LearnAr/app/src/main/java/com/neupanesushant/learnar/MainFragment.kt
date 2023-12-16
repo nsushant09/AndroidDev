@@ -1,6 +1,8 @@
 package com.neupanesushant.learnar
 
 import android.Manifest
+import com.google.ar.sceneform.ux.ArFragment
+import com.neupanesushant.learnar.arfragments.AugmentedImagesFragment
 import com.neupanesushant.learnar.arfragments.BasicAugmentationFragment
 import com.neupanesushant.learnar.core.BaseFragment
 import com.neupanesushant.learnar.databinding.FragmentMainBinding
@@ -19,14 +21,22 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     override fun setupEventListener() {
         binding.btnBasicAugmentation.setOnClickListener {
-            if (permissionHandler.hasPermission(Manifest.permission.CAMERA, requireContext())) {
-                val fragment = BasicAugmentationFragment()
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit()
-            } else {
-                permissionHandler.requestPermission(Manifest.permission.CAMERA)
-            }
+            navigateToArFragment(BasicAugmentationFragment())
+        }
+
+        binding.btnAugmentedImage.setOnClickListener {
+            navigateToArFragment(AugmentedImagesFragment())
+        }
+
+    }
+
+    private fun navigateToArFragment(fragment: ArFragment) {
+        if (permissionHandler.hasPermission(Manifest.permission.CAMERA, requireContext())) {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit()
+        } else {
+            permissionHandler.requestPermission(Manifest.permission.CAMERA)
         }
     }
 

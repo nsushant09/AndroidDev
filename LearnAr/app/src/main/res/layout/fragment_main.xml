@@ -14,6 +14,12 @@
             android:layout_height="wrap_content"
             android:text="@string/basic_augmentation" />
 
+        <Button
+            android:id="@+id/btnAugmentedImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/augmented_image" />
+
     </LinearLayout>
 
 </layout>

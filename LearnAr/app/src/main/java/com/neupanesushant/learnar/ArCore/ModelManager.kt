@@ -39,7 +39,12 @@ class ModelManager(private val context: Context) {
             }
     }
 
-    fun addModelToScene(fragment : ArFragment, anchor: Anchor, renderable: ModelRenderable) {
+    fun addModel(fragment: ArFragment, anchor: Anchor, renderable: ModelRenderable){
+        val node = AnchorNode(anchor)
+        node.renderable = renderable
+        fragment.arSceneView.scene.addChild(node)
+    }
+    fun addTransformableNodeModel(fragment : ArFragment, anchor: Anchor, renderable: ModelRenderable) {
         val node = AnchorNode(anchor)
         val transformableNode = TransformableNode(fragment.transformationSystem)
         transformableNode.setParent(node)
