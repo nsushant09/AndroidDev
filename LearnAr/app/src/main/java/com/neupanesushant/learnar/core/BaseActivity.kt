@@ -36,4 +36,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         return grantResults.isNotEmpty() &&
                 grantResults[0] == PackageManager.PERMISSION_GRANTED
     }
+
+    fun getActivityBinding(): T = binding
 }

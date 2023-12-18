@@ -16,25 +16,15 @@ class ModelManager(private val context: Context) {
         val uri = context.getRawUri(url)
         ModelRenderable.builder()
             .setSource(
-                context, RenderableSource.builder().setSource(
-                    context,
-                    uri,
-                    RenderableSource.SourceType.GLB
-                )
-                    .setScale(0.50f)
-                    .build()
+                context,
+                RenderableSource.builder().setSource(context, uri, RenderableSource.SourceType.GLB).setScale(0.50f).build()
             )
             .setRegistryId(uri.toString())
             .build()
             .thenAccept {
-                Log.d("MODEL", "Model Loaded")
                 onModelBuilt(it)
             }
             .exceptionally {
-                Log.e("MODEL", "Exception loading model: $it")
-                AlertDialog.Builder(context)
-                    .setMessage("Could not load model")
-                    .show()
                 null
             }
     }

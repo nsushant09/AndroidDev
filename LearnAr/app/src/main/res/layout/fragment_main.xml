@@ -20,6 +20,11 @@
             android:layout_height="wrap_content"
             android:text="@string/augmented_image" />
 
+        <Button
+            android:id="@+id/btnBuildModel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/build_model" />
     </LinearLayout>
 
 </layout>
