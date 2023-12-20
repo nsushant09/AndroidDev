@@ -1,12 +1,10 @@
 package com.neupanesushant.learnar.core
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 
 class Router {
     protected val context: Context
@@ -54,9 +52,5 @@ class Router {
         val intent = getIntentOrNull(action) ?: return
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         context.startActivity(intent)
-    }
-
-    private fun route(container : Int, action : Class<out Fragment>){
-
     }
 }

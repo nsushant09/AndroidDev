@@ -1,4 +1,4 @@
-package com.neupanesushant.learnar.core
+package com.neupanesushant.learnar.appcore
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import com.neupanesushant.learnar.MainFragment
 import com.neupanesushant.learnar.arfragments.AugmentedImagesFragment
 import com.neupanesushant.learnar.arfragments.BasicAugmentationFragment
 import com.neupanesushant.learnar.arfragments.BuildModelFragment
+import com.neupanesushant.learnar.core.AppConfig
 
 class BaseApplication : Application() {
     private val activityMap = mutableMapOf<String, Class<out AppCompatActivity>>()

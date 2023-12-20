@@ -1,4 +1,4 @@
-package com.neupanesushant.learnar.core
+package com.neupanesushant.learnar.appcore
 
 object RouteConfig {
 

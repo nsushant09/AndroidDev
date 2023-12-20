@@ -4,7 +4,7 @@ import android.Manifest
 import androidx.fragment.app.Fragment
 import com.neupanesushant.learnar.core.AppConfig
 import com.neupanesushant.learnar.core.BaseFragment
-import com.neupanesushant.learnar.core.RouteConfig
+import com.neupanesushant.learnar.appcore.RouteConfig
 import com.neupanesushant.learnar.databinding.FragmentMainBinding
 import com.neupanesushant.learnar.extras.PermissionHandler
 
