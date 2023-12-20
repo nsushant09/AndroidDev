@@ -1,0 +1,11 @@
+package com.neupanesushant.learnar.core
+
+object RouteConfig {
+
+    const val MAIN_ACTIVITY = "MAIN_ACTIVITY"
+
+    const val MAIN_FRAGMENT = "MAIN_FRAGMENT"
+    const val AUGMENTED_IMAGES_FRAGMENT = "AUGMENTED_IMAGES_FRAGMENT"
+    const val BASIC_AUGMENTATION_FRAGMENT = "BASIC_AUGMENTATION_FRAGMENT"
+    const val BUILD_MODEL_FRAGMENT = "BUILD_MODEL_FRAGMENT"
+}
