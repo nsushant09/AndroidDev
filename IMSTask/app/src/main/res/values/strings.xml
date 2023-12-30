@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">IMSTask</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="employees">Employees</string>
+    <string name="add">Add</string>
+    <string name="username">Username</string>
+    <string name="age">Age</string>
+    <string name="salary">Salary</string>
+    <string name="delete">Delete</string>
+</resources>
