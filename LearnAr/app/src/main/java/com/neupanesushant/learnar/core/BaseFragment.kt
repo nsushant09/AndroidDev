@@ -35,6 +35,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     }
 
     private fun setup() {
+        initialize()
         setupViews()
         setupEventListener()
         setupObserver()
@@ -46,4 +47,5 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     abstract fun setupObserver()
 
     protected open fun setupExtra() {}
+    protected open fun initialize() {}
 }

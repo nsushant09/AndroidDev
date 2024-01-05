@@ -7,7 +7,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 
 class Router {
-    protected val context: Context
+    private val context: Context
     private var data = Bundle()
 
     constructor(context: Context) {

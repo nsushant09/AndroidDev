@@ -8,6 +8,7 @@ import com.neupanesushant.learnar.MainFragment
 import com.neupanesushant.learnar.arfragments.AugmentedImagesFragment
 import com.neupanesushant.learnar.arfragments.BasicAugmentationFragment
 import com.neupanesushant.learnar.arfragments.BuildModelFragment
+import com.neupanesushant.learnar.arfragments.TestFragment
 import com.neupanesushant.learnar.core.AppConfig
 
 class BaseApplication : Application() {
@@ -30,6 +31,7 @@ class BaseApplication : Application() {
 
     private fun setupFragments() {
         fragmentMap.apply {
+            put(RouteConfig.TEST_FRAGMENT, TestFragment::class.java)
             put(RouteConfig.MAIN_FRAGMENT, MainFragment::class.java)
             put(RouteConfig.BASIC_AUGMENTATION_FRAGMENT, BasicAugmentationFragment::class.java)
             put(RouteConfig.BUILD_MODEL_FRAGMENT, BuildModelFragment::class.java)

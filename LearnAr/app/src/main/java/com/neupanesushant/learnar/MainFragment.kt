@@ -49,3 +49,5 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     }
 
 }
+
+// Android Application for Furniture Shopping with Augmented Reality Object Placement

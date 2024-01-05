@@ -8,4 +8,5 @@
     <string name="sphere">Sphere</string>
     <string name="cube">Cube</string>
     <string name="build_model">Build Model</string>
+    <string name="vector">vector</string>
 </resources>

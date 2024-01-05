@@ -60,5 +60,5 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun delete(indiEmployee: IndiEmployee) = viewModelScope.launch {
         val response = RetrofitClient.employeeEndpoints.deleteEmployee(indiEmployee.id)
         responseMessage.value = response.message
-    }
+    }       
 }

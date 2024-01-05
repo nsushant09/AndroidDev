@@ -19,6 +19,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun setupEventListener() {
+        supportFragmentManager
     }
 
     override fun setupObserver() {

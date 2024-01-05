@@ -9,7 +9,7 @@ import androidx.databinding.ViewDataBinding
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
-    protected lateinit var binding: T
+    private lateinit var binding: T
 
     @get:LayoutRes
     protected abstract val layoutId: Int
@@ -20,16 +20,18 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     }
 
     private fun setup() {
+        initialize()
         setupViews()
         setupEventListener()
         setupObserver()
         setupExtras()
     }
 
-    abstract fun setupViews();
-    abstract fun setupEventListener();
-    abstract fun setupObserver();
+    abstract fun setupViews()
+    abstract fun setupEventListener()
+    abstract fun setupObserver()
 
+    protected open fun initialize() {}
     protected open fun setupExtras() {}
 
     protected fun isPermissionGranted(grantResults: IntArray): Boolean {
