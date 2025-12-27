@@ -1,9 +1,9 @@
 package com.neupanesushant.learnar.arfragments
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import com.google.ar.core.Session
+import com.google.ar.sceneform.rendering.Color
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import com.neupanesushant.learnar.ArCore.ArInitializer
@@ -46,10 +46,13 @@ class BasicAugmentationFragment : ArFragment() {
 
             val anchor = hitResult.createAnchor()
             modelManager.buildModel("scene") {
-                modelManager.addTransformableNodeModel(this, anchor, it)
+//                modelManager.addTransformableNodeModel(this, anchor, it)
+
+                val copy = it
+                copy.getMaterial(1).setFloat3("baseColor", Color(android.graphics.Color.RED))
+                copy.getMaterial(1).setFloat3("baseColorTint", Color(android.graphics.Color.RED))
+                modelManager.addTransformableNodeModel(this, anchor, copy)
             }
-
-
             requireContext().show("Displaying Object")
             isModelSet = true
         }
